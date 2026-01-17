@@ -1,0 +1,92 @@
+import Image from "next/image";
+import yuvaLogo from "@/app/public/Sadaiv_logo.png"
+
+export default function ADvertismentWithNews() {
+  const breakingNews = [
+    "Major tech breakthrough announced in AI development",
+    "Stock markets reach new highs amid economic recovery",
+    "Climate summit reaches historic agreement"
+  ];
+
+  return (
+    <div className="flex flex-col lg:flex-row items-center gap-4 md:gap-6 px-4 md:px-8">
+      {/* Left Half: News Section */}
+      <div className="w-full lg:w-1/2 flex items-center gap-4 md:gap-6">
+        {/* News Image */}
+        <div className="w-[100px] sm:w-[140px] md:w-[200px] h-[100px] sm:h-[140px] md:h-[180px] flex-shrink-0">
+          <div className="relative h-full rounded-lg overflow-hidden shadow-md group cursor-pointer">
+            <img
+              src="http://localhost:3000/_next/image?url=https%3A%2F%2Fmapi.sadaivsatya.com%2FMedia%2FNewsImage%2Fpodg44xbezt.webp&w=1920&q=75"
+              alt="Trending News"
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          </div>
+        </div>
+
+        {/* News Text */}
+        <div className="flex-1 flex flex-col justify-center">
+          <div className="inline-flex items-center gap-2 mb-2 md:mb-3">
+            <div className="bg-[#e74238] text-white px-2 md:px-3 py-1 text-[9px] md:text-[10px] font-bold tracking-wider uppercase">
+              ट्रेंडिंग #1
+            </div>
+            <div className="flex items-center gap-1">
+              <div className="w-2 h-2 rounded-full bg-[#e74238] animate-pulse"></div>
+              <span className="text-gray-500 text-[10px] md:text-[11px] font-medium">अभी</span>
+            </div>
+          </div>
+          <h2 className="text-base sm:text-xl md:text-2xl lg:text-xl xl:text-2xl leading-[1.3] font-bold text-gray-900 mb-1 md:mb-2 hover:text-[#e74238] transition-colors cursor-pointer line-clamp-2">
+            भारत में कोविड-19 के नए मामलों में तेजी से वृद्धि, स्वास्थ्य मंत्रालय ने जारी की चेतावनी
+          </h2>
+          <p className="text-gray-600 text-[12px] sm:text-[13px] md:text-[14px] leading-relaxed line-clamp-2 hidden sm:block">
+            केंद्रीय स्वास्थ्य मंत्रालय ने राज्यों को कोविड प्रोटोकॉल का सख्ती से पालन करने के निर्देश दिए हैं। विशेषज्ञों का कहना है कि...
+          </p>
+        </div>
+      </div>
+
+      {/* Right Half: Cybersecurity Advertisement */}
+      <div className="w-full lg:w-1/2 flex flex-col justify-center">
+        {/* Advertisement Label */}
+        <div className="mb-2">
+          <span className="text-[10px] md:text-[11px] font-semibold tracking-wider uppercase text-gray-500 bg-gray-100 px-3 py-1 rounded-full inline-block">
+            Advertisement
+          </span>
+        </div>
+        
+        {/* Advertisement Banner - Cybersecurity Focus */}
+        <div className="relative w-full h-[120px] sm:h-[140px] md:h-[160px] lg:h-[180px] rounded-lg overflow-hidden shadow-lg bg-gradient-to-r from-orange-500 via-white to-green-600">
+          <div className="w-full h-full flex items-center justify-between px-6 md:px-8">
+            {/* Left Side - Logo and Organization Name */}
+            <div className="flex items-center gap-4">
+              <div className="w-16 h-16 md:w-20 md:h-20 bg-white rounded-full flex items-center justify-center shadow-lg">
+                <img src={yuvaLogo.src} alt="Sadaiv Yuva Foundation" className="w-full h-full object-contain"/>
+              </div>
+              <div className="flex flex-col">
+                <h3 className="text-lg md:text-2xl font-bold text-gray-900">सदैव युवा फाउंडेशन</h3>
+                <p className="text-xs md:text-sm text-gray-700 font-medium">Sadaiv Yuva Foundation</p>
+              </div>
+            </div>
+            
+            {/* Right Side - Cybersecurity Message & CTA */}
+            <a href="https://www.sadaivyuvafoundation.com/" className="hidden md:block">
+              <div className="flex flex-col items-end">
+                <p className="text-sm font-semibold text-gray-800 mb-1">🔒 साइबर सुरक्षा जागरूकता</p>
+                <p className="text-xs text-gray-700 mb-2">डिजिटल इंडिया को सुरक्षित बनाएं</p>
+                <button className="bg-orange-600 hover:bg-orange-700 text-white px-6 py-2 rounded-full font-bold text-sm transition-all shadow-md">
+                  जानें अधिक
+                </button>
+              </div>
+            </a>
+            
+            {/* Mobile CTA */}
+            <a href="https://www.sadaivyuvafoundation.com/" className="md:hidden">
+              <button className="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-full font-bold text-xs transition-all shadow-md">
+                Learn More
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
