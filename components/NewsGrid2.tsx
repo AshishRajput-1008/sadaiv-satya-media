@@ -6,6 +6,7 @@ import NewsMetaBar from "./NewsMetaBar";
 import ViewCount from "./ViewCount";
 import Image from "next/image";
 
+import ShareButtons from "./ShareButtons";
 interface NewsGridProps {
   articles: NewsArticle[];
 }
@@ -21,7 +22,15 @@ export default function NewsGrid2({ articles }: NewsGridProps) {
   };
 
   return (
-    <div className="max-w-[1400px] mx-auto px-4 py-6">
+    <div className="max-w-[1400px] mx-auto px-8 py-6">
+      {/* Section Heading */}
+      <div className="mb-6 pb-3 border-b-2 border-red-500">
+        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 relative inline-block">
+          <span className="text-red-500">टॉप</span> न्यूज़
+          <div className="absolute -bottom-3 left-0 w-full h-1 bg-gradient-to-r from-re-500 to-transparent"></div>
+        </h2>
+      </div>
+
       <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {articles.map((article) => (
           <article
@@ -39,29 +48,47 @@ export default function NewsGrid2({ articles }: NewsGridProps) {
             </div>
 
             {/* Meta */}
-            <div className="space-y-1">
-              <div className="flex items-center justify-between gap-1 text-[12px] text-gray-600 mb-2">
-                <span>
-                  {article.updatedDate ? formatDate(article.updatedDate) : ""}
-                </span>
-                <ViewCount count={article.viewCount} />
-              </div>
+            <div className="">
+              {/* Desktop: Category | Mobile: Category and ShareButton */}
+              <div className="flex justify-between text-[12px] text-gray-400 mb-[2px] mt-[10px]">
+                <NewsMetaBar
+                  variant="pill-arrow"
+                  newsCategory={article.newsCategory}
+                  newsCatinhindi={article.catNameInHindi}
+                  newsSubCategory={article.newsSubCategory || ""}
+                  newsSlug={article.newsSlug || ""}
+                />
 
-              <NewsMetaBar
-                categoryColor= "#b91c1c"     
-                newsCategory={article.newsCategory}
-                newsCatinhindi={article.catNameInHindi}
-                newsSubCategory={article.newsSubCategory || ""}
-                newsSlug={article.newsSlug || ""}
-              />
+                {/* Mobile: Share button aligned right */}
+                {/* <span className="md:hidden mt-2">
+                  <ShareButtons
+                    shareUrl={`/sports-news/news/${article.newsSlug}`}
+                    size="small"
+                  />
+                </span> */}
+
+                {/* Desktop: ViewCount aligned right */}
+               <ShareButtons
+                  shareUrl={`/sports-news/news/${article.newsSlug}`}
+                  size="small"
+                />
+              </div>
 
               {/* Title */}
               <div
                 style={{ marginTop: "14px" }}
-                className="text-[18px] font-medium text-black group-hover:text-red-600 transition-colors leading-snug line-clamp-3"
+                className="text-[18px]  font-medium text-blacktransition-colors leading-snug line-clamp-3"
               >
-                <span className="text-[#FF554B]">{article.newsTag}:</span>{" "}
+                <span className="text-red-500 ">{article.newsTag}:</span>{" "}
                 {article.newsHeading}
+              </div>
+
+              {/* Desktop only: Date and Share buttons at bottom */}
+              <div className="hidden md:flex justify-between mr-1 text-[14px]">
+                <p className="text-[12px] text-[#898b91] font-medium mt-2">
+                  {article.updatedDate ? formatDate(article.updatedDate) : ""}
+                </p>
+               
               </div>
             </div>
           </article>

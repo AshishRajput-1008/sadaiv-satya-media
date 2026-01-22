@@ -55,34 +55,55 @@ export default function ADvertismentWithNews() {
         
         {/* Advertisement Banner - Cybersecurity Focus */}
         <div className="relative w-full h-[120px] sm:h-[140px] md:h-[160px] lg:h-[180px] rounded-lg overflow-hidden shadow-lg bg-gradient-to-r from-orange-500 via-white to-green-600">
-          <div className="w-full h-full flex items-center justify-between px-6 md:px-8">
+          <div className="w-full h-full flex items-center justify-between px-4 md:px-6 lg:px-8">
             {/* Left Side - Logo and Organization Name */}
-            <div className="flex items-center gap-4">
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-white rounded-full flex items-center justify-center shadow-lg">
+            <div className="flex items-center gap-3 md:gap-4">
+              <div className="w-14 h-14 md:w-18 md:h-18 lg:w-20 lg:h-20 bg-white rounded-full flex items-center justify-center shadow-lg flex-shrink-0">
                 <img src={yuvaLogo.src} alt="Sadaiv Yuva Foundation" className="w-full h-full object-contain"/>
               </div>
               <div className="flex flex-col">
-                <h3 className="text-lg md:text-2xl font-bold text-gray-900">सदैव युवा फाउंडेशन</h3>
-                <p className="text-xs md:text-sm text-gray-700 font-medium">Sadaiv Yuva Foundation</p>
+                <h3 className="text-base md:text-xl lg:text-2xl font-bold text-gray-900 leading-tight">सदैव युवा फाउंडेशन</h3>
+                <p className="text-[10px] md:text-xs lg:text-sm text-gray-700 font-medium">Sadaiv Yuva Foundation</p>
               </div>
             </div>
             
             {/* Right Side - Cybersecurity Message & CTA */}
-            <a href="https://www.sadaivyuvafoundation.com/" className="hidden md:block">
-              <div className="flex flex-col items-end">
-                <p className="text-sm font-semibold text-gray-800 mb-1">🔒 साइबर सुरक्षा जागरूकता</p>
-                <p className="text-xs text-gray-700 mb-2">डिजिटल इंडिया को सुरक्षित बनाएं</p>
-                <button className="bg-orange-600 hover:bg-orange-700 text-white px-6 py-2 rounded-full font-bold text-sm transition-all shadow-md">
+            <a href="https://www.sadaivyuvafoundation.com/" className="hidden lg:block">
+              <div className="flex flex-col items-end gap-2">
+                <div className="bg-red-600 text-white px-4 py-1.5 rounded-md">
+                  <p className="text-sm font-bold">🔒 साइबर पुलिस द्वारा खाता फ्रीज</p>
+                </div>
+                <p className="text-xs text-gray-800 font-semibold">डिजिटल धोखाधड़ी से बचाव</p>
+                <button className="mt-1 bg-orange-600 hover:bg-orange-700 text-white px-6 py-2 rounded-full font-bold text-sm transition-all shadow-md">
                   जानें अधिक
                 </button>
               </div>
             </a>
             
-            {/* Mobile CTA */}
+            {/* Tablet View */}
+            <a href="https://www.sadaivyuvafoundation.com/" className="hidden md:block lg:hidden">
+              <div className="flex flex-col items-end gap-1.5">
+                <div className="bg-red-600 text-white px-3 py-1 rounded-md">
+                  <p className="text-xs font-bold">🔒 साइबर पुलिस द्वारा खाता फ्रीज</p>
+                </div>
+                <button className="mt-1 bg-orange-600 hover:bg-orange-700 text-white px-5 py-1.5 rounded-full font-bold text-xs transition-all shadow-md">
+                  जानें अधिक
+                </button>
+              </div>
+            </a>
+            
+            {/* Mobile View */}
             <a href="https://www.sadaivyuvafoundation.com/" className="md:hidden">
-              <button className="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-full font-bold text-xs transition-all shadow-md">
-                Learn More
-              </button>
+              <div className="flex flex-col items-end gap-2">
+                <div className="bg-red-600 text-white px-3 py-2 rounded-lg shadow-md">
+                  <p className="text-[11px] font-bold leading-relaxed text-center">
+                    🔒 साइबर पुलिस<br/>द्वारा खाता फ्रीज
+                  </p>
+                </div>
+                <button className="bg-orange-600 hover:bg-orange-700 text-white px-4 py-2 rounded-full font-bold text-[11px] transition-all shadow-md">
+                  जानें अधिक
+                </button>
+              </div>
             </a>
           </div>
         </div>

@@ -4,7 +4,7 @@ import Link from "next/link";
 import ShareButtons from "./ShareButtons";
 import NewsMetaBar from "./NewsMetaBar";
 import ViewCount from "./ViewCount";
-import payzoneapi from "@/app/public/advImages/vericationADV.png"
+import payzoneapi from "@/app/public/advImages/vericationADV.png";
 
 // Sadaiv Vishesh (Always Special) articles data
 const sadaivVisheshArticles = [
@@ -155,17 +155,26 @@ export default function SadaivVisheshSection() {
   const bottomArticles = sadaivVisheshArticles.slice(4, 8);
 
   return (
-    <section className="bg-white py-6 px-6">
+    <section className="bg-white py-6 px-8">
       <div className="max-w-[1400px] mx-auto">
         {/* Section Header */}
-        <div className="mb-6">
+        {/* <div className="mb-6">
           <h2 className="text-[28px] md:text-[32px] font-bold text-[#1a1a1a] border-l-4 border-black pl-4 bg-gradient-to-r from-purple-50 to-transparent py-2">
             भारत विशेष
           </h2>
+        </div> */}
+
+        <div className="flex justify-between items-center mb-4 md:mb-[12px]">
+          <div className="mb-6 pb-3 border-b-2 border-[#4f46e5]">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 relative inline-block">
+              <span className="text-gray-900">भारत</span>
+              <div className="absolute -bottom-3 left-0 w-full h-1 bg-gradient-to-r from-[#4f46e5] to-transparent"></div>
+            </h2>
+          </div>
         </div>
 
         {/* Top Row - 3 Articles + 1 Advertisement */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 lg:mb-4">
           {topArticles.map((article) => (
             <article key={article.newsId} className="group cursor-pointer">
               <Link href={`/${article.newsSlug}`}>
@@ -182,31 +191,53 @@ export default function SadaivVisheshSection() {
 
                 {/* Article Content */}
                 <div className="space-y-1">
-                  <div className="flex items-center justify-between gap-1 text-[12px] text-gray-600 mb-2">
+                  {/* <div className="flex items-center justify-between gap-1 text-[12px] text-gray-600 mb-2">
                     <span>
                       {article.updatedDate
                         ? formatDate(article.updatedDate)
                         : ""}
                     </span>
                     <ViewCount count={article.viewCount} />
-                  </div>
+                  </div> */}
 
-                  <NewsMetaBar
-                    categoryColor="#00b0e2"
-                    newsCategory={article.newsCategory}
-                    newsCatinhindi={article.catNameInHindi}
-                    newsSubCategory={article.newsSubCategory || ""}
-                    newsSlug={article.newsSlug || ""}
-                  />
+                  <div className="flex justify-between">
+                    <NewsMetaBar
+                      variant="pill-arrow"
+                      newsCategory={article.newsCategory}
+                      newsCatinhindi={article.catNameInHindi}
+                      newsSubCategory={article.newsSubCategory || ""}
+                      newsSlug={article.newsSlug || ""}
+                      accentColor="#4f46e5"
+                    />
+                    <ShareButtons
+                      shareUrl={`/${article.newsSlug}`}
+                      size="small"
+                    />
+                  </div>
 
                   {/* Title */}
                   <div
                     style={{ marginTop: "14px" }}
                     className="text-[18px] font-medium text-black transition-colors leading-snug line-clamp-3 lg:line-clamp-2"
                   >
-                    <span className="text-[#00b0e2]">{article.newsTag}:</span>{" "}
+                    <span className="text-[#4f46e5]">{article.newsTag}:</span>{" "}
                     {article.newsHeading}
                   </div>
+
+               
+                     <div className="flex gap-1 text-[11px] md:text-[12px] text-gray-600 mb-2 md:mb-3">
+                  
+                   
+                      <span className="text-[13px] opacity-80">
+                      {article.updatedDate
+                        ? formatDate(article.updatedDate)
+                        : ""}
+                    </span>
+                    {/* <ViewCount count={article.viewCount} /> */}
+                   
+                   
+                   
+                  </div> 
                 </div>
 
                 {/* Bottom Border */}
@@ -217,7 +248,7 @@ export default function SadaivVisheshSection() {
 
           {/* Advertisement Card - 4th Position */}
           <div className="group">
-           <img src = {payzoneapi.src}/>
+            <img src={payzoneapi.src} />
           </div>
         </div>
 
@@ -228,23 +259,52 @@ export default function SadaivVisheshSection() {
               <Link href={`/${article.newsSlug}`}>
                 {/* Article Content */}
                 <div className="space-y-1">
-                  <div className="flex items-center justify-between gap-1 text-[11px] md:text-[12px] text-gray-600 mb-2">
+                  {/* <div className="flex items-center justify-between gap-1 text-[11px] md:text-[12px] text-gray-600 mb-2">
                     <span>
                       {article.updatedDate
                         ? formatDate(article.updatedDate)
                         : ""}
                     </span>
                     <ViewCount count={article.viewCount} />
+                  </div> */}
+
+                  <div className="flex justify-between">
+                    <NewsMetaBar
+                            variant="pill-arrow"
+                      newsCategory={article.newsCategory}
+                      newsCatinhindi={article.catNameInHindi}
+                      newsSubCategory={article.newsSubCategory || ""}
+                      newsSlug={article.newsSlug || ""}
+                      accentColor="#4f46e5"
+                    />
+                    <ShareButtons
+                      shareUrl={`/${article.newsSlug}`}
+                      size="small"
+                    />
                   </div>
 
                   {/* Title */}
                   <div
                     style={{ marginTop: "14px" }}
-                    className="text-[14px] md:text-[18px] font-medium text-black transition-colors leading-snug line-clamp-3 lg:line-clamp-2"
+                    className="text-[14px] md:text-[18px] font-medium text-black transition-colors leading-[1.6] line-clamp-3 lg:line-clamp-2"
                   >
-                    <span className="text-[#00b0e2]">{article.newsTag}:</span>{" "}
+                    <span className="text-[#4f46e5]">{article.newsTag}:</span>{" "}
                     {article.newsHeading}
                   </div>
+                  
+                     <div className="flex gap-1 text-[11px] md:text-[12px] text-gray-600 mb-2 md:mb-3">
+                  
+                   
+                      <span className="text-[13px] opacity-80">
+                      {article.updatedDate
+                        ? formatDate(article.updatedDate)
+                        : ""}
+                    </span>
+                    {/* <ViewCount count={article.viewCount} /> */}
+                   
+                   
+                   
+                  </div> 
                 </div>
 
                 {/* Bottom Border */}

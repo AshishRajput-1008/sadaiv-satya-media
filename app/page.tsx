@@ -3,7 +3,9 @@ import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import NewsGrid2 from "@/components/NewsGrid2";
 import type { StaticImageData } from "next/image";
-import advShoppy from "@/app/public/advImages/shoppyAdv.png"
+import advShoppy from "@/app/public/shoppy15ADV.png";
+import ShoppyBanner from "@/components/ShoppyBanner";
+import VerticalGridLayout from "@/components/VerticalGridLayout";
 
 import img1 from "./public/image1.png";
 import img2 from "./public/image2.png";
@@ -20,6 +22,8 @@ import AdvertisementBanner from "@/components/AdvertisementNavbar";
 import WebStoriesSection from "@/components/WebStoriesSection";
 import MustReadSection from "@/components/MustReadSection";
 import MainSection from "@/components/MainSection";
+import MobileBottomBar from "@/components/MobileBottomBar";
+import DemoPage from "@/components/Demopage";
 
 interface Article {
   newsId: number;
@@ -49,8 +53,8 @@ const articles: Article[] = [
   {
     newsId: 10108423,
     newsHeading:
-      "कहा– उत्तर प्रदेश के ‘कल्याण’ से जुड़ा उनका नाम सदैव प्रेरणा रहेगा",
-    newsTag: "‘बाबूजी’ कल्याण सिंह की जयंती",
+      "कहा– उत्तर प्रदेश के 'कल्याण' से जुड़ा उनका नाम सदैव प्रेरणा रहेगा",
+    newsTag: "'बाबूजी' कल्याण सिंह की जयंती",
     thumbnail: img2,
     newsCategory: "State",
     newsSubCategory: "Uttar Pradesh",
@@ -76,7 +80,7 @@ const articles: Article[] = [
   {
     newsId: 10108276,
     newsHeading:
-      "कहा– उत्तर प्रदेश के ‘कल्याण’ से जुड़ा उनका नाम सदैव प्रेरणा रहेगा",
+      "कहा– उत्तर प्रदेश के 'कल्याण' से जुड़ा उनका नाम सदैव प्रेरणा रहेगा",
     newsTag: "माता की चौकी के वीडियो हुए वायरल",
     thumbnail: img1,
     newsCategory: "Meethee Mirchee",
@@ -84,7 +88,7 @@ const articles: Article[] = [
     updatedDate: "2026-01-09T15:50:30.507",
     newsSlug:
       "sudha-chandran-reacts-to-trolling-over-viral-mata-ki-chowki-video-10108276.html",
-    catNameInHindi: "मीठी मिर्ची",
+    catNameInHindi: "भारत",
     viewCount: 634,
   },
 ];
@@ -104,15 +108,23 @@ export default function Home() {
       <WebStoriesSection />
       <MustReadSection />
       <NewsPage2 />
-     
       <VideoNewsSection />
-        <div className="flex items-center justify-center">
-          <img className="h-[280px]" src={advShoppy.src}/>
-       </div>
+
       <MusicSection />
+      <ShoppyBanner />
       <SportsNews />
       <TVSection />
+      <VerticalGridLayout />
+
+      {/* Add padding bottom for mobile to prevent content from being hidden behind bottom bar */}
+      <div className="md:hidden h-16"></div>
+
+      {/* <DemoPage/> */}
+
       <Footer />
+
+      {/* Mobile Bottom Navigation Bar */}
+      <MobileBottomBar />
     </main>
   );
 }

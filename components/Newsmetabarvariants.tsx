@@ -21,13 +21,7 @@ interface NewsMetaBarProps {
   newsSlug: string;
   accentColor?: string;
   showShareButtons?: boolean;
-  variant?:
-    | "pill"
-    | "pill-arrow"
-    | "minimal"
-    | "underline"
-    | "solid"
-    | "outline";
+  variant?: "pill" | "minimal" | "underline" | "solid" | "outline";
 }
 
 /* ---------- helpers ---------- */
@@ -48,7 +42,7 @@ export default function NewsMetaBar({
   newsSlug,
   accentColor = "#ef4444",
   showShareButtons = true,
-  variant = "solid", // Default variant - SOLID for bold impact
+  variant = "pill", // Default variant
 }: NewsMetaBarProps) {
   const categorySlug = toSlug(newsCategory);
   const subcategorySlug = newsSubCategory ? toSlug(newsSubCategory) : null;
@@ -71,8 +65,8 @@ export default function NewsMetaBar({
             className="inline-flex items-center px-2.5 py-1 rounded-full transition-transform hover:scale-105"
             style={{ backgroundColor: `${accentColor}15` }}
           >
-            <span
-              className="font-semibold text-[12px] whitespace-nowrap"
+            <span 
+              className="font-semibold text-[11px] whitespace-nowrap"
               style={{ color: accentColor }}
             >
               {newsCatinhindi}
@@ -80,39 +74,6 @@ export default function NewsMetaBar({
           </Link>
         )}
         {showShareButtons && <ShareButtons shareUrl={newsUrl} size="small" />}
-      </div>
-    );
-  }
-
-  // VARIANT 7: PILL-ARROW - Exact replica
-  // VARIANT 7: PILL-ARROW - Size matched to share buttons
-  if (variant === "pill-arrow") {
-    return (
-      <div className="flex items-center justify-between gap-2">
-        {newsCategory && (
-          <Link
-            href={categoryPageUrl}
-            className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 hover:border-gray-300 dark:hover:border-gray-600 transition-all shadow-sm group"
-          >
-            <span className="font-semibold text-[13px] md:text-[12px] opacity-90 text-gray-500  dark:text-gray-600 whitespace-nowrap">
-              {newsCatinhindi}
-            </span>
-            <svg
-              className="w-3 h-3 text-gray-400 dark:text-gray-400 group-hover:translate-x-0.5 transition-transform flex-shrink-0"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2.5}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </Link>
-        )}
-        {/* {showShareButtons && <ShareButtons shareUrl={newsUrl} size="small" />} */}
       </div>
     );
   }
@@ -126,11 +87,11 @@ export default function NewsMetaBar({
             href={categoryPageUrl}
             className="inline-flex items-center gap-1.5 hover:opacity-75 transition-opacity"
           >
-            <div
-              className="w-1.5 h-1.5 rounded-full"
+            <div 
+              className="w-1.5 h-1.5 rounded-full" 
               style={{ backgroundColor: accentColor }}
             />
-            <span
+            <span 
               className="font-semibold text-[11px] whitespace-nowrap"
               style={{ color: accentColor }}
             >
@@ -138,7 +99,7 @@ export default function NewsMetaBar({
             </span>
           </Link>
         )}
-        {/* {showShareButtons && <ShareButtons shareUrl={newsUrl} size="small" />} */}
+        {showShareButtons && <ShareButtons shareUrl={newsUrl} size="small" />}
       </div>
     );
   }
@@ -155,8 +116,8 @@ export default function NewsMetaBar({
             <span className="font-semibold text-[11px] text-gray-700 dark:text-gray-300 whitespace-nowrap">
               {newsCatinhindi}
             </span>
-            <div
-              className="h-0.5 w-full rounded-full mt-0.5"
+            <div 
+              className="h-0.5 w-full rounded-full mt-0.5" 
               style={{ backgroundColor: accentColor }}
             />
           </Link>
@@ -181,7 +142,7 @@ export default function NewsMetaBar({
             </span>
           </Link>
         )}
-        {/* {showShareButtons && <ShareButtons shareUrl={newsUrl} size="small" />} */}
+        {showShareButtons && <ShareButtons shareUrl={newsUrl} size="small" />}
       </div>
     );
   }
@@ -194,13 +155,13 @@ export default function NewsMetaBar({
           <Link
             href={categoryPageUrl}
             className="inline-flex items-center px-2 py-0.5 rounded transition-all hover:shadow-sm"
-            style={{
-              borderWidth: "1.5px",
-              borderStyle: "solid",
-              borderColor: accentColor,
+            style={{ 
+              borderWidth: '1.5px',
+              borderStyle: 'solid',
+              borderColor: accentColor 
             }}
           >
-            <span
+            <span 
               className="font-semibold text-[11px] whitespace-nowrap"
               style={{ color: accentColor }}
             >
@@ -208,7 +169,7 @@ export default function NewsMetaBar({
             </span>
           </Link>
         )}
-        {/* {showShareButtons && <ShareButtons shareUrl={newsUrl} size="small" />} */}
+        {showShareButtons && <ShareButtons shareUrl={newsUrl} size="small" />}
       </div>
     );
   }

@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import ViewCount from "./ViewCount";
+import hoistingIMG from "@/app/public/hostingADV3.png";
 import ShareButtons from "./ShareButtons";
-import hoistingIMG from "@/app/public/advImages/payzonhositing.png"
+import NewsMetaBar from "./NewsMetaBar";
 
 // Sample data - Replace with your actual API call
 const GetAlwaysSpecialNews = [
@@ -89,7 +90,7 @@ const GetAlwaysSpecialNews = [
 ];
 
 // Helper function to strip HTML tags and get clean text
-const stripHtml = (html) => {
+const stripHtml = (html?: string | null): string => {
   if (!html) return "";
   return html
     .replace(/<[^>]*>/g, " ")
@@ -101,7 +102,7 @@ const stripHtml = (html) => {
 };
 
 // Helper function to get short description (limit to ~200 characters)
-const getShortDescription = (html, maxLength = 200) => {
+const getShortDescription = (html?: string | null, maxLength = 200): string => {
   const cleanText = stripHtml(html);
   if (cleanText.length <= maxLength) return cleanText;
 
@@ -115,7 +116,8 @@ const getShortDescription = (html, maxLength = 200) => {
 };
 
 // Helper function to format date
-const formatDate = (dateString) => {
+const formatDate = (dateString?: string | null): string => {
+  if (!dateString) return "";
   const date = new Date(dateString);
   const months = [
     "जनवरी",
@@ -139,13 +141,28 @@ export default function AdditionalSections() {
   const [featuredArticle, ...bottomCards] = GetAlwaysSpecialNews;
 
   return (
-    <div className="bg-[#f5f5f5] min-h-screen">
+    <div className="bg-[#f5f5f5]">
       {/* Lifestyle Magazine Section - सदैव विशेष */}
-      <div className="bg-[#ffffff] px-4 md:px-4 lg:px-[30px] py-4 md:py-[40px]">
+      <div className="bg-[#ffffff] px-4 md:px-4 lg:px-[40px] py-4 md:py-[30px]">
         <div className="max-w-[1400px] mx-auto">
-          <h2 className="text-[28px] md:text-[32px] font-bold text-[#1a1a1a] mb-6 md:mb-[40px]">
-            सदैव विशेष
-          </h2>
+          {/* <div className="flex justify-between items-center mb-4 md:mb-6">
+            <div className="mb-6 pb-3 border-b-2 border-[#f89c1b]">
+              <h2 className="text-2xl md:text-[32px] font-bold text-gray-900 relative inline-block">
+                <span className="text-[#f89c1b]">सदैव</span> विशेष
+                <div className="absolute -bottom-3 left-0 w-full h-1 bg-gradient-to-r from-[#f89c1b]-to-transparent"></div>
+              </h2>
+            </div>
+          </div> */}
+
+
+             <div className="flex justify-between items-center mb-4 md:mb-6 mt-2">
+            <div className="mb-6 pb-3 border-b-2 border-[#f89c1b]">
+              <h2 className="text-2xl md:text-[32px] font-bold text-gray-900 relative inline-block">
+                <span className="text-[#f89c1b]">सदैव</span> विशेष
+                <div className="absolute -bottom-3 left-0 w-full h-1 bg-gradient-to-r from-[#f89c1b] to-transparent"></div>
+              </h2>
+            </div>
+          </div>
 
           <div className="flex flex-col lg:flex-row gap-6 lg:gap-[30px]">
             {/* Left Side - Featured Image + Content + Bottom Cards */}
@@ -172,17 +189,27 @@ export default function AdditionalSections() {
                 {/* Content - Right */}
                 <div className="flex-1 flex flex-col justify-start">
                   <Link href={`/${featuredArticle.newsSlug}`} className="block">
-                    {/* <div className="text-[12px] text-[#666] mb-3">
-                      {featuredArticle.newsTag}
-                    </div> */}
-                    <div className="text-[12px] text-[#999] mb-4 flex justify-between items-center">
-                      {featuredArticle.catNameInHindi ||
-                        featuredArticle.newsCategory}{" "}
-                      - {formatDate(featuredArticle.updatedDate)}
-
-                    
+                    {/* Category and Share Button Row - With spacing below */}
+                    <div className="flex justify-between items-center mb-3 md:mb-4">
+                      <NewsMetaBar
+                        newsCategory={featuredArticle.newsCategory}
+                        newsCatinhindi={featuredArticle.catNameInHindi}
+                        newsSubCategory={featuredArticle.newsSubCategory || ""}
+                        newsSlug={featuredArticle.newsSlug || ""}
+                        accentColor="#f89c1b"
+                      />
+                      
+                      {/* Share Button on Mobile */}
+                      <div className="md:hidden">
+                        <ShareButtons
+                          shareUrl={`/${featuredArticle.newsSlug}`}
+                          size="small"
+                        />
+                      </div>
                     </div>
-                    <h3 className="text-[26px] md:text-[28px] font-medium text-black hover:text-red-500 leading-[1.3] mb-4">
+
+                    {/* Heading with spacing above */}
+                    <h3 className="text-[28px] md:text-[28px] font-medium text-black leading-[1.3] mt-3 lg:mt-0 mb-3">
                       <span className="text-stone-800">
                         {featuredArticle.newsTag}:
                       </span>{" "}
@@ -191,20 +218,26 @@ export default function AdditionalSections() {
 
                     {/* Short Description */}
                     {featuredArticle.newsHeadingTwo && (
-                      <p className="text-[15px] text-[#666] leading-[1.9] line-clamp-10">
+                      <p className="text-[17px] text-[#666] leading-[1.9] line-clamp-10">
                         {getShortDescription(
                           featuredArticle.newsHeadingTwo,
-                          416
-                        )} 
+                          416,
+                        )}
                       </p>
                     )}
 
-                    <div className="flex justify-between mx-2 mt-2">
-                      <ViewCount count={featuredArticle.viewCount} />
-                      <ShareButtons
-                        shareUrl={`/sports-news/news/${featuredArticle.newsSlug}`}
-                        size="small"
-                      />
+                    {/* Date and Share (Desktop) */}
+                    <div className="flex justify-between mx-2 ml-0 mt-2">
+                      <p className="text-[13px] text-gray-600 ml-0">
+                        {formatDate(featuredArticle.updatedDate)}
+                      </p>
+                      {/* Share Button on Desktop */}
+                      <div className="hidden md:block">
+                        <ShareButtons
+                          shareUrl={`/${featuredArticle.newsSlug}`}
+                          size="small"
+                        />
+                      </div>
                     </div>
                   </Link>
                 </div>
@@ -218,22 +251,40 @@ export default function AdditionalSections() {
                     className="border-b border-dotted border-[#ccc] pb-5"
                   >
                     <Link href={`/${news.newsSlug}`} className="block">
-                      <div className="text-[11px] text-[#666] mb-2">
-                        {news.catNameInHindi} | {formatDate(news.updatedDate)}
+                      {/* Category and Share Button Row - With spacing below */}
+                      <div className="flex justify-between items-center mb-3">
+                        <NewsMetaBar
+                          variant="pill-arrow"
+                          newsCategory={news.newsCategory}
+                          newsCatinhindi={news.catNameInHindi}
+                          newsSubCategory={news.newsSubCategory || ""}
+                          newsSlug={news.newsSlug || ""}
+                          accentColor="#f89c1b"
+                        />
+                        
+                        {/* Share Button on Mobile */}
+                        <div className="md:hidden">
+                          <ShareButtons
+                            shareUrl={`/${news.newsSlug}`}
+                            size="small"
+                          />
+                        </div>
                       </div>
-                      <h3 className="text-[15px] md:text-[16px] mb-2 font-medium text-[#1a1a1a] leading-[1.4] line-clamp-2 hover:text-[#4a90e2] transition-colors">
-                       
-                   <span className="text-gray-800">
-                        {featuredArticle.newsTag}:
-                      </span>{" "}
-                       
+
+                      {/* Heading with spacing above */}
+                      <h3 className="text-[15px] md:text-[16px] mb-2 font-medium text-[#1a1a1a] leading-[1.4] line-clamp-2 ">
+                        <span className="text-gray-800">{news.newsTag}:</span>{" "}
                         {news.newsHeading}
                       </h3>
-                      <div><ShareButtons
-                        shareUrl={`/sports-news/news/${featuredArticle.newsSlug}`}
-                        size="small"
-                      /></div>
                     </Link>
+                    
+                    {/* Share Button on Desktop */}
+                    <div className="hidden md:block">
+                      <ShareButtons
+                        shareUrl={`/${news.newsSlug}`}
+                        size="small"
+                      />
+                    </div>
                   </div>
                 ))}
               </div>

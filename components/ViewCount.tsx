@@ -6,7 +6,7 @@ type Props = {
 
 export default function ViewCount({ count }: Props) {
   return (
-    <span className="mr-2 flex items-center gap-1 text-[10px] sm:text-[12px] text-gray-400 dark:text-gray-400">
+    <span className="mr-2 flex items-center opacity-70 gap-1 text-[10px] sm:text-[12px] text-gray-400 dark:text-gray-400">
       <EyeIcon />
       {formatViews(count)}
     </span>

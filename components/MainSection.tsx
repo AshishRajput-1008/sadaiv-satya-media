@@ -3,8 +3,11 @@
 import { PT_Serif, Noto_Sans_Devanagari } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
+import digitalADV from "@/app/public/redApi.png";
 
 import ShareButtons from "./ShareButtons";
+import NewsMetaBar from "./NewsMetaBar";
+import ViewCount from "@/components/ViewCount";
 
 const notoSansDevanagari = Noto_Sans_Devanagari({
   subsets: ["devanagari"],
@@ -159,21 +162,8 @@ const sportsNews = [
       "wpl-2026-begins-rcb-beat-mi-by-3-wickets-opening-match-10108381.html",
     thumbnail: "/Media/NewsImage/fzpemds2vbv.webp",
     updatedDate: "2026-01-10T13:13:00.15",
-    catNameInHindi: "खेल समाचार",
+    catNameInHindi: "खेल ",
     viewCount: 345,
-  },
-  {
-    newsId: 10107940,
-    newsTag: "प्यारा क्रिकेटिंग पल",
-    newsHeading: "वीडियो हुआ वायरल",
-    newsCategory: "Sports News",
-    newsSubCategory: "Cricket",
-    newsSlug:
-      "arjun-tendulkar-birthday-yograj-singh-dance-video-viral-10107940.html",
-    thumbnail: "/Media/NewsThumb/nihondg2ogq.gif",
-    updatedDate: "2026-01-08T14:01:49.847",
-    catNameInHindi: "खेल समाचार",
-    viewCount: 1133,
   },
   {
     newsId: 10107709,
@@ -184,7 +174,7 @@ const sportsNews = [
     newsSlug: "mohammed-shami-election-commission-sir-notice-10107709.html",
     thumbnail: "/Media/NewsImage/w1f0dnkie2e.webp",
     updatedDate: "2026-01-07T15:34:30.913",
-    catNameInHindi: "खेल समाचार",
+    catNameInHindi: "खेल ",
     viewCount: 695,
   },
   {
@@ -197,22 +187,9 @@ const sportsNews = [
       "deepti-sharma-premanand-maharaj-blessings-after-2025-womens-cricket-world-cup-10107226.html",
     thumbnail: "/Media/NewsImage/qeuuynxk3jl.webp",
     updatedDate: "2026-01-05T16:40:25.43",
-    catNameInHindi: "खेल समाचार",
+    catNameInHindi: "खेल ",
     viewCount: 283,
   },
-  // {
-  //   newsId: 10108675,
-  //   newsTag: "बनारसी बोली में PM मोदी का दिल जीतता पल",
-  //   newsHeading: "72वीं नेशनल वॉलीबॉल चैंपियनशिप का वर्चुअल उद्घाटन",
-  //   newsCategory: "Sports News",
-  //   newsSubCategory: "Tournament Updates",
-  //   newsSlug:
-  //     "pm-modi-banarasi-boli-national-volleyball-championship-varanasi-10108675.html",
-  //   thumbnail: "/Media/NewsThumb/nx4luicbrfd.gif",
-  //   updatedDate: "2026-01-12T14:24:24.703",
-  //   catNameInHindi: "खेल समाचार",
-  //   viewCount: 645,
-  // },
 ];
 
 const entertainmentNews = [
@@ -274,7 +251,7 @@ const getTimeAgo = (dateString: string) => {
   const date = new Date(dateString);
   const now = new Date();
   const diffInHours = Math.floor(
-    (now.getTime() - date.getTime()) / (1000 * 60 * 60)
+    (now.getTime() - date.getTime()) / (1000 * 60 * 60),
   );
 
   if (diffInHours < 1) return "अभी";
@@ -283,10 +260,10 @@ const getTimeAgo = (dateString: string) => {
   return `${diffInDays} दिन पहले`;
 };
 
-export default function Home() {
+export default function MainSection() {
   return (
     <div className={`${notoSansDevanagari.className} bg-white`}>
-      <div className="max-w-[1200px] mx-auto px-4 md:px-6 py-4 md:py-8">
+      <div className="max-w-[1200px] mx-auto px-4 md:px-6 py-4 md:py-8 pb-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
           {/* Left Column - Sports News (Desktop only) */}
           <div className="hidden lg:block lg:col-span-3">
@@ -296,8 +273,8 @@ export default function Home() {
 
             {/* Featured Sports News */}
             {sportsNews[0] && (
-              <div className="mb-8">
-                <div className="mb-4">
+              <div className="mb-6">
+                <div className="mb-3 overflow-hidden">
                   <Image
                     src={getImageUrl(sportsNews[0].thumbnail)}
                     alt={sportsNews[0].newsHeading}
@@ -306,27 +283,31 @@ export default function Home() {
                     className="w-full h-[200px] object-cover"
                   />
                 </div>
-                <div className="text-xs text-gray-600 mb-2 flex items-center justify-between">
-                  <span className="bg-gray-200 px-2 py-1 mr-2">
-                    {sportsNews[0].catNameInHindi}
+
+                <div className="flex justify-between">
+                  <span className="text-gray-500 font-medium text-[14px] my-2 mb-1 block">
+                    {formatDate(sportsNews[0].updatedDate)}
                   </span>
-                  <span>{getTimeAgo(sportsNews[0].updatedDate)}</span>
+
+                  {/* <ViewCount count={sportsNews[0].viewCount} /> */}
                 </div>
 
-                <div
-                  style={{ marginTop: "14px" }}
-                  className="text-[18px] font-medium text-black transition-colors leading-snug line-clamp-3 lg:line-clamp-2"
-                >
-                  <span className="text-gray-700  mr-[2px] font-bold">
+                <h3 className="text-[18px] font-semibold text-gray-900 leading-1.3 mb-3 mt-1">
+                  <span className="text-[#2563eb]">
                     {sportsNews[0].newsTag}:
                   </span>{" "}
                   {sportsNews[0].newsHeading}
-                </div>
+                </h3>
 
-                <div className="mt-2 flex items-center gap-2 text-xs text-gray-500 justify-between">
-                  <span className="text-gray-800  mt-2 text-[16px]">
-                    {formatDate(sportsNews[0].updatedDate)}
-                  </span>
+                <div className="flex items-center justify-between text-xs">
+                  <NewsMetaBar
+                    variant="pill-arrow"
+                    newsCategory={sportsNews[0].newsCategory}
+                    newsCatinhindi={sportsNews[0].catNameInHindi}
+                    newsSubCategory={sportsNews[0].newsSubCategory || ""}
+                    newsSlug={sportsNews[0].newsSlug || ""}
+                    accentColor="#2563eb"
+                  />
                   <ShareButtons
                     shareUrl={`/sports-news/news/${sportsNews[0].newsSlug}`}
                     size="small"
@@ -335,142 +316,69 @@ export default function Home() {
               </div>
             )}
 
-            {/* Sports News List - Image on RIGHT with Share Button - Desktop */}
-            <div className="space-y-4">
-              {sportsNews.slice(1, 5).map((news) => (
-                <Link
-                  key={news.newsId}
-                  href={`/sports-news/news/${news.newsSlug}`}
-                  className="flex gap-3"
-                >
-                  {/* Content on Left */}
-                  <div className="flex-1 flex flex-col justify-between">
-                    <div>
-                      <span className="text-[11px] text-slate-600 font-medium">
-                        {news.catNameInHindi}
-                      </span>
-                      <h4 className="text-[14px] font-semibold mt-2 space-y-1">
-                        {/* TAG — strictly max 2 lines */}
-                        <span
-                          style={{
-                            display: "-webkit-box",
-                            WebkitLineClamp: 2,
-                            WebkitBoxOrient: "vertical",
-                            overflow: "hidden",
-                            lineHeight: "1.4",
-                          }}
-                          className="block text-cyan-600"
-                        >
-                          {news.newsTag}:
-                        </span>
+            {/* Sports News List - Image on RIGHT with NewsMetaBar - Desktop */}
+            <div className="space-y-5">
+              {sportsNews.slice(1).map((news) => (
+                <div key={news.newsId} className="block group">
+                  <Link href={`/sports-news/news/${news.newsSlug}`}>
+                    <div className="flex gap-3 mb-3">
+                      {/* Content on Left */}
+                      <div className="flex-1 flex flex-col">
+                        <div className="flex justify-between">
+                          <p className="text-[11px] text-gray-500 mb-1 font-medium">
+                            {formatDate(news.updatedDate)}
+                          </p>
+                          <p className="mb-1">
+                            {" "}
+                            {/* <ViewCount count={news.viewCount} /> */}
+                          </p>
+                        </div>
 
-                        {/* HEADING — strictly max 2 lines */}
-                        <span
-                          style={{
-                            display: "-webkit-box",
-                            WebkitLineClamp: 2,
-                            WebkitBoxOrient: "vertical",
-                            overflow: "hidden",
-                            lineHeight: "1.4",
-                          }}
-                          className="block text-gray-900"
-                        >
+                        <h4 className="text-[16px] font-semibold text-gray-900 leading-[1.4] line-clamp-3 mt-1">
+                          <span className="text-[#2563eb] font-semibold">
+                            {news.newsTag}:
+                          </span>{" "}
                           {news.newsHeading}
-                        </span>
-                      </h4>
+                        </h4>
+                        <div className="mt-2">
+                          <NewsMetaBar
+                            variant="pill-arrow"
+                            newsCategory={news.newsCategory}
+                            newsCatinhindi={news.catNameInHindi}
+                            newsSubCategory={news.newsSubCategory || ""}
+                            newsSlug={news.newsSlug || ""}
+                            accentColor="#2563eb"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Image on Right */}
+                      <div className="flex flex-col items-center gap-2">
+                        <div className="relative w-[120px] h-[100px] flex-shrink-0 overflow-hidden">
+                          <Image
+                            src={getImageUrl(news.thumbnail)}
+                            alt={news.newsHeading}
+                            fill
+                            className="object-cover w-[120px] h-[90px]"
+                          />
+                        </div>
+                        {/* Share buttons positioned below image */}
+                        <ShareButtons
+                          shareUrl={`/sports-news/news/${news.newsSlug}`}
+                          size="small"
+                        />
+                      </div>
                     </div>
-                    <p className="text-[11px] text-gray-500 mt-1">
-                      {formatDate(news.updatedDate)}
-                    </p>
-                  </div>
-                  {/* Image and Share Button on Right */}
-                  <div className="flex flex-col items-center">
-                    <div className="relative w-[120px] h-[90px] flex-shrink-0 mb-2">
-                      <Image
-                        src={getImageUrl(news.thumbnail)}
-                        alt={news.newsHeading}
-                        fill
-                        className="object-cover rounded"
-                      />
-                    </div>
-                    <ShareButtons
-                      shareUrl={`/sports-news/news/${news.newsSlug}`}
-                      size="small"
-                    />
-                  </div>
-                </Link>
+                  </Link>
+
+                  {/* NewsMetaBar at Bottom */}
+                </div>
               ))}
             </div>
 
             {/* Advertisement Section - Desktop Only */}
-            <div className="mt-6 border-t-2 border-gray-300 pt-4">
-              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-4 rounded-lg shadow-md border border-blue-100">
-                <div className="text-center mb-4">
-                  <h3 className="text-lg font-bold text-blue-900 mb-2">
-                    PayzonIndia
-                  </h3>
-                  <p className="text-sm text-blue-700 font-semibold">
-                    Digital India Marketing
-                  </p>
-                </div>
-
-                <div className="space-y-3 text-sm text-gray-700">
-                  <div className="flex items-start gap-2">
-                    <svg
-                      className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                    <span>डिजिटल मार्केटिंग सेवाएं</span>
-                  </div>
-
-                  <div className="flex items-start gap-2">
-                    <svg
-                      className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                    <span>SEO & सोशल मीडिया</span>
-                  </div>
-
-                  <div className="flex items-start gap-2">
-                    <svg
-                      className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                    <span>ब्रांड प्रमोशन</span>
-                  </div>
-                </div>
-
-                <button className="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200">
-                  अभी संपर्क करें
-                </button>
-
-                <div className="mt-3 text-center">
-                  <p className="text-xs text-gray-600">
-                    🚀 अपने बिजनेस को बढ़ाएं
-                  </p>
-                </div>
-              </div>
+            <div className="mt-8 pt-6 border-t-2 border-gray-200">
+              <img src={digitalADV.src} alt="Digital Marketing Advertisement" />
             </div>
           </div>
 
@@ -490,26 +398,29 @@ export default function Home() {
                   height={400}
                   className="w-full h-[250px] md:h-[380px] object-cover mb-4"
                 />
-                <div className="flex text-xs md:text-[14px] text-gray-600 mb-2 justify-between">
-                  <span className="px-2 py-1 mr-1 pl-0 text-slate-500 font-bold rounded-full">
-                    {taazaKhabarNews[0].catNameInHindi}:
-                    <span className="text-black ml-2">
-                      {getTimeAgo(taazaKhabarNews[0].updatedDate)}
-                    </span>
-                  </span>
+                <div className="flex items-center justify-between mb-3">
+                  {/* NewsMetaBar at Bottom */}
 
-                  <span>
-                    <ShareButtons
-                      shareUrl={`/taaza-halachal/news/${taazaKhabarNews[0].newsSlug}`}
-                      size="small"
-                    />
-                  </span>
+                  <NewsMetaBar
+                    variant="pill-arrow"
+                    newsCategory={taazaKhabarNews[0].newsCategory}
+                    newsCatinhindi={taazaKhabarNews[0].catNameInHindi}
+                    newsSubCategory={taazaKhabarNews[0].newsSubCategory || ""}
+                    newsSlug={taazaKhabarNews[0].newsSlug || ""}
+                    accentColor="#0dbc90"
+                  />
+                  <ShareButtons
+                    shareUrl={`/${taazaKhabarNews[0].newsSlug}`}
+                    size="small"
+                  />
                 </div>
-                <h3 className="text-lg md:text-2xl font-medium leading-tight mb-2 mt-2">
-                  <span className="text-[#000000] mr-[2px]">
+                <h3 className="text-lg md:text-[22px] font-semibold leading-tight mb-2">
+                  <span className="text-[#d62875] mr-1">
                     {taazaKhabarNews[0].newsTag}:
                   </span>{" "}
-                  {taazaKhabarNews[0].newsHeading}
+                  <span className="text-gray-900">
+                    {taazaKhabarNews[0].newsHeading}
+                  </span>
                 </h3>
               </div>
             )}
@@ -520,65 +431,78 @@ export default function Home() {
                 <Link
                   key={news.newsId}
                   href={`/taaza-halachal/news/${news.newsSlug}`}
-                  className="block bg-white shadow-sm hover:shadow-md transition-shadow"
+                  className="block bg-white shadow-sm"
                 >
-                  <div className="flex p-2">
+                  <div className="flex p-0">
                     {/* Content on Left */}
-                    <div className="flex-1 mr-4 flex flex-col">
-                      <div className="inline-flex w-fit">
-                        <span className="text-[13px] text-slate-800 rounded-full font-medium mb-2">
-                          {news.catNameInHindi}
+                    <div className="flex-1 pr-4 py-3 flex flex-col">
+                      {/* Top Section - Date and Views aligned left and right */}
+                      <div className="flex items-center justify-between mb-3">
+                        <p className="text-[13px] font-medium text-[#a4a7ad]">
+                          {formatDate(news.updatedDate)}
+                        </p>
+
+                        <span className="flex items-center lg:mr-[6px] mt-[1px] gap-1.5 text-[13px] text-gray-400">
+                          <svg
+                            className="w-4 h-4 ml-[2px]"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                            />
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                            />
+                          </svg>
+                          {news.viewCount}
                         </span>
                       </div>
-                      <h3 className="text-[18px] font-medium text-[#1a1a1a] leading-[1.4] mb-2">
-                        <span className="text-stone-500 mr-[2px]">
-                          {news.newsTag}:
-                        </span>{" "}
-                        {news.newsHeading}
-                      </h3>
-                      <div className="flex items-center gap-2 text-[13px] text-[#666] justify-between mt-auto">
-                        <div className="flex items-center gap-2">
-                          <span className="text-[#999]">
-                            {formatDate(news.updatedDate)}
+
+                      {/* Middle Section - Tag and Heading vertically centered */}
+                      <div className="flex-1 flex items-center mb-3">
+                        <h3 className="text-[20px] md:text-[18px] font-semibold text-[#1a1a1a] leading-[1.4]">
+                          <span className="text-[#d62875] mr-1">
+                            {news.newsTag}:
+                          </span>{" "}
+                          <span className="text-gray-900">
+                            {news.newsHeading}
                           </span>
-                          <span className="text-[#ccc]">•</span>
-                          <span className="flex items-center gap-1 text-xs text-gray-500">
-                            <svg
-                              className="w-4 h-4"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                              />
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                              />
-                            </svg>
-                            {news.viewCount}
-                          </span>
-                        </div>
+                        </h3>
+                      </div>
+
+                      {/* Bottom Section - NewsMetaBar */}
+                      <div className="flex justify-between text-[13px] text-gray-500 opacity-80">
+                        <NewsMetaBar
+                          variant="pill-arrow"
+                          newsCategory={news.newsCategory}
+                          newsCatinhindi={news.catNameInHindi}
+                          newsSubCategory={news.newsSubCategory || ""}
+                          newsSlug={news.newsSlug || ""}
+                          accentColor="#f89c1b"
+                        />
+
                         <ShareButtons
-                          shareUrl={`/taaza-halachal/news/${news.newsSlug}`}
+                          shareUrl={`/${news.newsSlug}`}
                           size="small"
                         />
                       </div>
                     </div>
 
                     {/* Image on Right */}
-                    <div className="relative w-[180px] h-[110px] flex-shrink-0">
+                    <div className="relative w-[180px] h-[130px] flex-shrink-0">
                       <Image
                         src={`${baseImageUrl}${news.thumbnail}`}
                         alt={news.newsHeading}
                         fill
-                        className="object-cover rounded"
+                        className="object-cover"
                       />
                     </div>
                   </div>
@@ -586,55 +510,60 @@ export default function Home() {
               ))}
             </div>
 
-            {/* Mobile View - Image on RIGHT */}
+            {/* Mobile View - Image on RIGHT - Using Khel Samachar Layout */}
             <div className="md:hidden space-y-4">
               {taazaKhabarNews.slice(1).map((news) => (
-                <Link
+                <div
                   key={news.newsId}
-                  href={`/taaza-halachal/news/${news.newsSlug}`}
-                  className="flex gap-3 bg-white"
+                  className="bg-white p-3 rounded-lg shadow-sm"
                 >
-                  {/* Content on Left */}
-                  <div className="flex-1 flex flex-col justify-between">
-                    <div>
-                      <span className="text-[11px] text-slate-600 font-medium">
-                        {news.catNameInHindi}
-                      </span>
-                      <h3
-                        style={{
-                          display: "-webkit-box",
-                          WebkitLineClamp: 3,
-                          WebkitBoxOrient: "vertical",
-                        }}
-                        className="text-[14px] font-semibold text-[#1a1a1a] leading-tight mt-1 overflow-hidden"
-                      >
-                        <span className="text-stone-500 mr-[2px]">
+                  <Link
+                    href={`/taaza-halachal/news/${news.newsSlug}`}
+                    className="flex gap-3 mb-3"
+                  >
+                    {/* Content on Left */}
+                    <div className="flex-1 flex flex-col">
+                      {/* Date at top */}
+                      <p className="text-[12px] text-gray-500 mb-2">
+                        {formatDate(news.updatedDate)}
+                      </p>
+
+                      <h4 className="text-[18px] md:text-[14px] font-semibold text-gray-900 leading-[1.6] line-clamp-3">
+                        <span className="text-[#d62875] font-semibold">
                           {news.newsTag}:
                         </span>{" "}
                         {news.newsHeading}
-                      </h3>
+                      </h4>
+                      <div className="mt-4">
+                        <NewsMetaBar
+                          variant="pill-arrow"
+                          newsCategory={news.newsCategory}
+                          newsCatinhindi={news.catNameInHindi}
+                          newsSubCategory={news.newsSubCategory || ""}
+                          newsSlug={news.newsSlug || ""}
+                          accentColor="#0dbc90"
+                        />
+                      </div>
                     </div>
-                    <div className="flex items-center justify-between mt-1">
-                      <p className="text-[11px] text-gray-500">
-                        {formatDate(news.updatedDate)}
-                      </p>
+
+                    {/* Image on Right */}
+                    <div className="flex flex-col items-center gap-2 mt-4">
+                      <div className="relative w-[120px] h-[90px] flex-shrink-0 mt-2">
+                        <Image
+                          src={`${baseImageUrl}${news.thumbnail}`}
+                          alt={news.newsHeading}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                      {/* Share buttons positioned below image */}
                       <ShareButtons
-                        shareUrl={`/taaza-halachal/news/${news.newsSlug}`}
+                        shareUrl={`/${news.newsSlug}`}
                         size="small"
                       />
                     </div>
-                  </div>
-
-                  {/* Image on Right */}
-                  <div className="relative w-[120px] h-[90px] flex-shrink-0">
-                    <Image
-                      src={`${baseImageUrl}${news.thumbnail}`}
-                      alt={news.newsHeading}
-                      fill
-                      className="object-cover rounded"
-                    />
-                  </div>
-                </Link>
+                  </Link>
+                </div>
               ))}
             </div>
           </div>
@@ -642,36 +571,38 @@ export default function Home() {
           {/* Right Column - Business News (Desktop only) */}
           <div className="hidden lg:block lg:col-span-3">
             <div className={`${ptSerif.className}`}>
-              <h2 className="text-2xl font-bold mb-6 pb-2 border-b-2 border-black">
+              <h2 className="text-2xl font-bold mb-6 pb-2 border-b-2 border-gray-800">
                 कारोबार
               </h2>
 
-              {/* Business News List - Exact Image Design */}
+              {/* Business News List - Improved Design */}
               <div className="space-y-0">
                 {business.map((news, index) => (
                   <Link
                     key={news.newsId}
                     href={`/business/news/${news.newsSlug}`}
-                    className="block"
+                    className="block group"
                   >
                     <div
-                      className={`py-4 ${
+                      className={`py-5 ${
                         index < business.length - 1
-                          ? "border-b border-dotted border-gray-400"
+                          ? "border-b border-gray-300"
                           : ""
                       }`}
                     >
                       {/* Metadata line */}
-                      <div className="text-[12px] text-gray-600 mb-3">
-                        <span>{news.catNameInHindi}</span>
-                        <span className="mx-1">|</span>
-                        <span>{news.author || "सिल्विउ मिहाई"}</span>
-                        <span className="mx-1">-</span>
+                      <div className="text-[13px] text-gray-600 mb-3 flex items-center flex-wrap gap-1">
+                        <span className="font-medium">
+                          {news.catNameInHindi}
+                        </span>
+                        <span className="text-gray-400">•</span>
+                        <span>{news.viewCount || "सिल्विउ मिहाई"} views</span>
+                        <span className="text-gray-400">•</span>
                         <span>{formatDate(news.updatedDate)}</span>
                       </div>
 
                       {/* Headline - Bold, no tag */}
-                      <h3 className="text-[16px] font-bold text-black leading-tight hover:text-gray-700 transition-colors">
+                      <h3 className="text-[16px] font-bold text-gray-900 leading-tight">
                         {news.newsHeading}
                       </h3>
                     </div>
@@ -680,54 +611,121 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Entertainment Section (Rangeen Parda) */}
-            <div className="mt-10 pt-6 border-t-2 border-black">
-              <h2 className="text-2xl font-bold mb-6 pb-2">रंगीन पर्दा</h2>
+            {/* Entertainment Section (Rangeen Parda) - FIXED DESKTOP LAYOUT */}
+            <div className="mt-6 pt-4">
+              <h2 className="text-2xl font-bold mb-6 pb-2 border-b-2 border-black">
+                रंगीन पर्दा
+              </h2>
 
-              <div className="flex items-center justify-center mb-8">
-                <Image
-                  src={getImageUrl(entertainmentNews[0].thumbnail)}
-                  alt="Culture logo"
-                  width={300}
-                  height={150}
-                  className="w-58 h-auto"
-                />
-              </div>
+              {/* Featured Entertainment News */}
+              {entertainmentNews[0] && (
+                <div className="mb-6">
+                  <div className="mb-3 overflow-hidden">
+                    <Image
+                      src={getImageUrl(entertainmentNews[0].thumbnail)}
+                      alt={entertainmentNews[0].newsHeading}
+                      width={400}
+                      height={250}
+                      className="w-full h-[200px] object-cover"
+                    />
+                  </div>
 
+                  <div className="flex justify-between">
+                    <span className="text-gray-500 font-medium text-[14px] my-2 block">
+                      {formatDate(entertainmentNews[0].updatedDate)}
+                    </span>
+                    <p className="mt-[2px]">
+                      {" "}
+                      {/* <ViewCount count={entertainmentNews[0].viewCount} /> */}
+                    </p>
+                  </div>
+
+                  <h3 className="text-[18px] font-semibold text-gray-900 leading-1.3 mb-3">
+                    <span className="text-[#83b82e]">
+                      {entertainmentNews[0].newsTag}:
+                    </span>{" "}
+                    {entertainmentNews[0].newsHeading}
+                  </h3>
+
+                  <div className="flex items-center justify-between text-xs">
+                    <NewsMetaBar
+                      variant="pill-arrow"
+                      newsCategory={entertainmentNews[0].newsCategory}
+                      newsCatinhindi={entertainmentNews[0].catNameInHindi}
+                      newsSubCategory={
+                        entertainmentNews[0].newsSubCategory || ""
+                      }
+                      newsSlug={entertainmentNews[0].newsSlug || ""}
+                      accentColor="#d62875"
+                    />
+                    <ShareButtons
+                      shareUrl={`/colorful-curtains/news/${entertainmentNews[0].newsSlug}`}
+                      size="small"
+                    />
+                  </div>
+                </div>
+              )}
+
+              {/* Entertainment News List - Image on RIGHT with NewsMetaBar - Desktop */}
               <div className="space-y-5">
-                {entertainmentNews.map((news) => (
-                  <div key={news.newsId} className="flex gap-3">
-                    {/* Content on Left */}
-                    <div className="flex-1">
-                      <div className="text-[10px] text-gray-600 mb-2">
-                        <span className="bg-gray-200 px-1.5 py-0.5">
-                          {news.catNameInHindi}
-                        </span>
+                {entertainmentNews.slice(1).map((news) => (
+                  <div key={news.newsId} className="block group">
+                    <Link href={`/colorful-curtains/news/${news.newsSlug}`}>
+                      <div className="flex gap-3 mb-3">
+                        {/* Content on Left */}
+                        <div className="flex-1 flex flex-col">
+                          {/* <p className="text-[10px] text-gray-500 mb-2">
+                            {formatDate(news.updatedDate)}
+                          </p> */}
+
+                          <div className="flex justify-between">
+                            <p className="text-[12px] text-gray-500 mb-2 font-medium">
+                              {formatDate(news.updatedDate)}
+                            </p>
+                            {/* <p className="">
+                              {" "}
+                              <ViewCount
+                                count={entertainmentNews[0].viewCount}
+                              />
+                            </p> */}
+                          </div>
+
+                          <h4 className="text-[16px] font-semibold text-gray-900 leading-[1.4] line-clamp-3">
+                            <span className="text-[#83b82e] font-semibold">
+                              {news.newsTag}:
+                            </span>{" "}
+                            {news.newsHeading}
+                          </h4>
+                          <div className="mt-2">
+                            <NewsMetaBar
+                              variant="pill-arrow"
+                              newsCategory={news.newsCategory}
+                              newsCatinhindi={news.catNameInHindi}
+                              newsSubCategory={news.newsSubCategory || ""}
+                              newsSlug={news.newsSlug || ""}
+                              accentColor="#d62875"
+                            />
+                          </div>
+                        </div>
+
+                        {/* Image on Right */}
+                        <div className="flex flex-col items-center gap-2">
+                          <div className="relative w-[110px] h-[100px] flex-shrink-0 overflow-hidden">
+                            <Image
+                              src={getImageUrl(news.thumbnail)}
+                              alt={news.newsHeading}
+                              fill
+                              className="object-cover"
+                            />
+                          </div>
+                          {/* Share buttons positioned below image */}
+                          <ShareButtons
+                            shareUrl={`/colorful-curtains/news/${news.newsSlug}`}
+                            size="small"
+                          />
+                        </div>
                       </div>
-                      <h4 className="text-sm font-semibold leading-tight">
-                        <span className="text-[#0f86f5] mr-[2px]">
-                          {news.newsTag}:
-                        </span>{" "}
-                        {news.newsHeading}
-                      </h4>
-                      <p className="text-[10px] text-gray-600 mt-1">
-                        {getTimeAgo(news.updatedDate)}
-                      </p>
-                    </div>
-                    {/* Image and Share Button on Right */}
-                    <div className="flex flex-col items-center">
-                      <Image
-                        src={getImageUrl(news.thumbnail)}
-                        alt={news.newsHeading}
-                        width={80}
-                        height={80}
-                        className="w-20 h-20 object-cover flex-shrink-0 mb-2"
-                      />
-                      <ShareButtons
-                        shareUrl={`/colorful-curtains/news/${news.newsSlug}`}
-                        size="small"
-                      />
-                    </div>
+                    </Link>
                   </div>
                 ))}
               </div>
@@ -745,26 +743,30 @@ export default function Home() {
               {/* Featured Sports Card - Mobile */}
               {sportsNews[0] && (
                 <div className="mb-6">
-                  <Image
-                    src={getImageUrl(sportsNews[0].thumbnail)}
-                    alt={sportsNews[0].newsHeading}
-                    width={400}
-                    height={250}
-                    className="w-full h-[200px] object-cover rounded mb-3"
-                  />
-                  <span className="text-[11px] text-slate-600 font-medium">
-                    {sportsNews[0].catNameInHindi}
-                  </span>
-                  <h3 className="text-[16px] font-bold text-black leading-tight mt-2 mb-2">
-                    <span className="text-stone-600 mr-[2px]">
+                  <div className="mb-3">
+                    <Image
+                      src={getImageUrl(sportsNews[0].thumbnail)}
+                      alt={sportsNews[0].newsHeading}
+                      width={400}
+                      height={250}
+                      className="w-full h-[200px] object-cover"
+                    />
+                  </div>
+
+                  <h3 className="text-[20px] font-bold text-black leading-tight mb-3 mt-1">
+                    <span className="text-[#2563eb] mr-[2px]">
                       {sportsNews[0].newsTag}:
                     </span>{" "}
                     {sportsNews[0].newsHeading}
                   </h3>
-                  <div className="flex items-center justify-between">
-                    <p className="text-[12px] text-gray-500">
+
+                  {/* NewsMetaBar at bottom */}
+                  <div className="flex justify-between">
+                    {/* Date at top */}
+                    <p className="text-[12px] text-gray-500 mb-2">
                       {formatDate(sportsNews[0].updatedDate)}
                     </p>
+
                     <ShareButtons
                       shareUrl={`/sports-news/news/${sportsNews[0].newsSlug}`}
                       size="small"
@@ -775,52 +777,58 @@ export default function Home() {
 
               {/* Horizontal Sports Cards - Mobile */}
               <div className="space-y-4">
-                {sportsNews.slice(1, 5).map((news) => (
-                  <Link
+                {sportsNews.slice(1).map((news) => (
+                  <div
                     key={news.newsId}
-                    href={`/sports-news/news/${news.newsSlug}`}
-                    className="flex gap-3"
+                    className="bg-white p-3 rounded-lg shadow-sm"
                   >
-                    {/* Content on Left */}
-                    <div className="flex-1 flex flex-col justify-between">
-                      <div>
-                        <span className="text-[11px] text-slate-600 font-medium">
-                          {news.catNameInHindi}
-                        </span>
-                        <h4
-                          style={{
-                            display: "-webkit-box",
-                            WebkitLineClamp: 3,
-                            WebkitBoxOrient: "vertical",
-                          }}
-                          className="text-[14px] font-semibold leading-tight mt-1 overflow-hidden"
-                        >
-                          <span className="text-stone-600 mr-[2px]">
+                    <Link
+                      href={`/sports-news/news/${news.newsSlug}`}
+                      className="flex gap-3 mb-3"
+                    >
+                      {/* Content on Left */}
+                      <div className="flex-1 flex flex-col">
+                        {/* Date at top */}
+                        <p className="text-[13px] text-gray-500 mb-2">
+                          {formatDate(news.updatedDate)}
+                        </p>
+
+                        <h4 className="text-[18px] font-semibold text-gray-900 leading-[1.6] line-clamp-3">
+                          <span className="text-[#2563eb] font-semibold">
                             {news.newsTag}:
                           </span>{" "}
                           {news.newsHeading}
                         </h4>
+                        <div className="mt-4">
+                          <NewsMetaBar
+                            variant="pill-arrow"
+                            newsCategory={news.newsCategory}
+                            newsCatinhindi={news.catNameInHindi}
+                            newsSubCategory={news.newsSubCategory || ""}
+                            newsSlug={news.newsSlug || ""}
+                            accentColor="#2563eb"
+                          />
+                        </div>
                       </div>
-                      <div className="flex items-center justify-between mt-1">
-                        <p className="text-[11px] text-gray-500">
-                          {formatDate(news.updatedDate)}
-                        </p>
+
+                      {/* Image on Right */}
+                      <div className="flex flex-col items-center gap-2 mt-4">
+                        <div className="relative w-[120px] h-[90px] flex-shrink-0 mt-2">
+                          <Image
+                            src={getImageUrl(news.thumbnail)}
+                            alt={news.newsHeading}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                        {/* Share buttons positioned below image */}
                         <ShareButtons
                           shareUrl={`/sports-news/news/${news.newsSlug}`}
                           size="small"
                         />
                       </div>
-                    </div>
-                    {/* Image on Right */}
-                    <div className="relative w-[120px] h-[90px] flex-shrink-0">
-                      <Image
-                        src={getImageUrl(news.thumbnail)}
-                        alt={news.newsHeading}
-                        fill
-                        className="object-cover rounded"
-                      />
-                    </div>
-                  </Link>
+                    </Link>
+                  </div>
                 ))}
               </div>
             </div>
@@ -865,7 +873,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Entertainment - Mobile */}
+            {/* Entertainment - Mobile - FIXED LAYOUT */}
             <div>
               <h2 className="text-xl font-bold mb-4 pb-2 border-b-2 border-black">
                 रंगीन पर्दा
@@ -874,26 +882,40 @@ export default function Home() {
               {/* Featured Entertainment Card - Mobile */}
               {entertainmentNews[0] && (
                 <div className="mb-6">
-                  <Image
-                    src={getImageUrl(entertainmentNews[0].thumbnail)}
-                    alt={entertainmentNews[0].newsHeading}
-                    width={400}
-                    height={250}
-                    className="w-full h-[200px] object-cover rounded mb-3"
-                  />
-                  <span className="text-[11px] text-slate-600 font-medium">
-                    {entertainmentNews[0].catNameInHindi}
-                  </span>
-                  <h3 className="text-[16px] font-bold text-black leading-tight mt-2 mb-2">
-                    <span className="text-[#0f86f5] mr-[2px]">
+                  <div className="mb-3">
+                    <Image
+                      src={getImageUrl(entertainmentNews[0].thumbnail)}
+                      alt={entertainmentNews[0].newsHeading}
+                      width={400}
+                      height={250}
+                      className="w-full h-[200px] object-cover"
+                    />
+                  </div>
+
+                  {/* Date at top */}
+                  <p className="text-[14px] text-gray-500 mb-2">
+                    {formatDate(entertainmentNews[0].updatedDate)}
+                  </p>
+
+                  <h3 className="text-[20px] font-bold text-black leading-1.4 mb-3">
+                    <span className="text-[#83b82e] mr-[2px]">
                       {entertainmentNews[0].newsTag}:
                     </span>{" "}
                     {entertainmentNews[0].newsHeading}
                   </h3>
-                  <div className="flex items-center justify-between">
-                    <p className="text-[12px] text-gray-500">
-                      {formatDate(entertainmentNews[0].updatedDate)}
-                    </p>
+
+                  {/* NewsMetaBar at bottom */}
+                  <div className="flex justify-between">
+                    <NewsMetaBar
+                      variant="pill-arrow"
+                      newsCategory={entertainmentNews[0].newsCategory}
+                      newsCatinhindi={entertainmentNews[0].catNameInHindi}
+                      newsSubCategory={
+                        entertainmentNews[0].newsSubCategory || ""
+                      }
+                      newsSlug={entertainmentNews[0].newsSlug || ""}
+                      accentColor="#d62875"
+                    />
                     <ShareButtons
                       shareUrl={`/colorful-curtains/news/${entertainmentNews[0].newsSlug}`}
                       size="small"
@@ -905,51 +927,57 @@ export default function Home() {
               {/* Horizontal Entertainment Cards - Mobile */}
               <div className="space-y-4">
                 {entertainmentNews.slice(1).map((news) => (
-                  <Link
+                  <div
                     key={news.newsId}
-                    href={`/colorful-curtains/news/${news.newsSlug}`}
-                    className="flex gap-3"
+                    className="bg-white p-3 rounded-lg shadow-sm"
                   >
-                    {/* Content on Left */}
-                    <div className="flex-1 flex flex-col justify-between">
-                      <div>
-                        <span className="text-[11px] text-slate-600 font-medium">
-                          {news.catNameInHindi}
-                        </span>
-                        <h4
-                          style={{
-                            display: "-webkit-box",
-                            WebkitLineClamp: 3,
-                            WebkitBoxOrient: "vertical",
-                          }}
-                          className="text-[14px] font-semibold leading-tight mt-2 overflow-hidden"
-                        >
-                          <span className="text-[#0f86f5] mr-[2px]">
+                    <Link
+                      href={`/colorful-curtains/news/${news.newsSlug}`}
+                      className="flex gap-3 mb-3"
+                    >
+                      {/* Content on Left */}
+                      <div className="flex-1 flex flex-col">
+                        {/* Date at top */}
+                        <p className="text-[13px] text-gray-500 mb-2">
+                          {formatDate(news.updatedDate)}
+                        </p>
+
+                        <h4 className="text-[18px] font-semibold text-gray-900 leading-[1.4] line-clamp-3">
+                          <span className="text-[#83b82e] font-semibold">
                             {news.newsTag}:
                           </span>{" "}
                           {news.newsHeading}
                         </h4>
+                        <div className="mt-4">
+                          <NewsMetaBar
+                            variant="pill-arrow"
+                            newsCategory={news.newsCategory}
+                            newsCatinhindi={news.catNameInHindi}
+                            newsSubCategory={news.newsSubCategory || ""}
+                            newsSlug={news.newsSlug || ""}
+                            accentColor="#d62875"
+                          />
+                        </div>
                       </div>
-                      <div className="flex items-center justify-between mt-1">
-                        <p className="text-[11px] text-gray-500">
-                          {formatDate(news.updatedDate)}
-                        </p>
+
+                      {/* Image on Right */}
+                      <div className="flex flex-col items-center gap-2">
+                        <div className="relative w-[120px] h-[90px] flex-shrink-0">
+                          <Image
+                            src={getImageUrl(news.thumbnail)}
+                            alt={news.newsHeading}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                        {/* Share buttons positioned below image */}
                         <ShareButtons
                           shareUrl={`/colorful-curtains/news/${news.newsSlug}`}
                           size="small"
                         />
                       </div>
-                    </div>
-                    {/* Image on Right */}
-                    <div className="relative w-[120px] h-[90px] flex-shrink-0">
-                      <Image
-                        src={getImageUrl(news.thumbnail)}
-                        alt={news.newsHeading}
-                        fill
-                        className="object-cover rounded"
-                      />
-                    </div>
-                  </Link>
+                    </Link>
+                  </div>
                 ))}
               </div>
             </div>

@@ -105,13 +105,22 @@ export default function VideoNewsSection() {
 
   return (
     <>
-      <div className="mb-4 ml-4 md:ml-6">
+      {/* <div className="mb-4 ml-4 md:ml-6">
         <h2 className="text-[28px]  md:text-[32px] font-bold text-[#1a1a1a] border-l-4 border-black pl-4 bg-gradient-to-r from-purple-50 to-transparent py-2">
           वीडियो समाचार
         </h2>
-      </div>
+      </div> */}
+
+
 
       <section className="bg-black py-6 md:py-8 px-3 md:px-4">
+
+          <div className="mb-6 pb-3 border-b-2 border-red-600">
+        <h2 className="text-2xl md:text-3xl font-bold text-white relative inline-block">
+          <span className="text-red-600">वीडियो</span> समाचार
+          <div className="absolute -bottom-3 left-0 w-full h-1 bg-gradient-to-r from-red-600 to-transparent"></div>
+        </h2>
+      </div>
         <div className="max-w-[1400px] mx-auto">
           {/* Main Video Section */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
@@ -203,7 +212,7 @@ export default function VideoNewsSection() {
                 <div>
                   <div className="flex items-center gap-1 md:gap-2 mb-1 md:mb-2">
                     <span
-                      className="text-[10px] md:text-xs text-[#9b79f5] font-semibold uppercase"
+                      className="text-[10px] md:text-xs text-gray-600 font-semibold uppercase"
                       style={{ fontFamily: "Rubik, sans-serif" }}
                     >
                       {video.category}
@@ -216,7 +225,7 @@ export default function VideoNewsSection() {
                     </span>
                   </div>
                   <h3
-                    className="text-[12px] md:text-sm font-medium text-white line-clamp-3 leading-snug group-hover:text-[#9b79f5] transition-colors"
+                    className="text-[12px] md:text-sm font-medium text-white line-clamp-2 leading-snug group-hover:text-gray-500 transition-colors"
                     style={{ fontFamily: "Rubik, sans-serif" }}
                   >
                     {video.title}

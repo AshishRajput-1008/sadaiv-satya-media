@@ -153,13 +153,22 @@ export default function RajneetiSection() {
   const displayArticles = rajneetiArticles.slice(0, 4);
 
   return (
-    <section className="bg-white py-4 px-6 mt-4">
+    <section className="bg-white py-4 px-8 mt-4">
       <div className="max-w-[1400px] mx-auto">
         {/* Section Header */}
-        <div className="mb-6">
+        {/* <div className="mb-6">
           <h2 className="text-[28px] md:text-[32px] font-bold text-[#1a1a1a] border-l-4 border-black pl-4 bg-gradient-to-r from-purple-50 to-transparent py-2">
             राजनीति
           </h2>
+        </div> */}
+
+        <div className="flex justify-between items-center mb-2 md:mb-[12px]">
+          <div className="mb-6 pb-3 border-b-2 border-[#ea580c]">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 relative inline-block">
+              <span className="text-gray-900">राजनीति</span>
+              <div className="absolute -bottom-3 left-0 w-full h-1 bg-gradient-to-r from-[#ea580c] to-transparent"></div>
+            </h2>
+          </div>
         </div>
 
         {/* Articles Grid - 2x2 on mobile, 4 columns on desktop */}
@@ -186,10 +195,32 @@ export default function RajneetiSection() {
 
                 {/* Article Content */}
                 <div className="flex-grow flex flex-col px-1 md:px-0">
+                  {/* Date and View Count */}
+
+                  <div className="mb-2 flex justify-between">
+                    <NewsMetaBar
+                       variant="pill-arrow"
+                      newsCategory={article.newsCategory}
+                      newsCatinhindi={article.catNameInHindi}
+                      newsSubCategory={article.newsSubCategory || ""}
+                      newsSlug={article.newsSlug || ""}
+                      accentColor="#ea580c"
+                    />
+
+
+ <ShareButtons
+                      shareUrl={`/${article.newsSlug}`}
+                      size="small"
+                    />
+
+
+                 
+                  </div>
+
                   {/* Title - Primary Content */}
                   <div className="mb-2 md:mb-3">
-                    <h3 className="text-[14px] md:text-[17px] lg:text-[18px] font-medium text-black transition-colors leading-snug line-clamp-3">
-                      <span className="text-[#0f86f5] mr-[2px]">
+                    <h3 className="text-[14px] md:text-[17px] lg:text-[18px] font-medium text-black transition-colors leading-snug line-clamp-3 lg:line-clamp-2">
+                      <span className="text-[#ea580c] mr-[2px]">
                         {article.newsTag}:
                       </span>{" "}
                       {article.newsHeading}
@@ -197,28 +228,24 @@ export default function RajneetiSection() {
                   </div>
 
                   {/* Meta Bar */}
-                  <div className="mb-2">
-                    <NewsMetaBar
-                      categoryColor="#0f86f5"
-                      newsCategory={article.newsCategory}
-                      newsCatinhindi={article.catNameInHindi}
-                      newsSubCategory={article.newsSubCategory || ""}
-                      newsSlug={article.newsSlug || ""}
-                    />
-                  </div>
 
-                  {/* Date and View Count */}
-                  <div className="flex items-center justify-between gap-1 text-[11px] md:text-[12px] text-gray-600 mb-2 md:mb-3">
-                    <span>
+                
+                     <div className="flex gap-1 text-[11px] md:text-[12px] text-gray-600 mb-2 md:mb-3">
+                  
+                   
+                      <span className="text-[13px] opacity-80">
                       {article.updatedDate
                         ? formatDate(article.updatedDate)
                         : ""}
                     </span>
-                    <ViewCount count={article.viewCount} />
-                  </div>
+                    {/* <ViewCount count={article.viewCount} /> */}
+                   
+                   
+                   
+                  </div> 
 
                   {/* Bottom Border - Fixed Position */}
-                  <div className="mt-auto pt-2 md:pt-3 border-t border-dotted border-gray-300"></div>
+                  <div className="mt-auto pt-2 md:pt-4 border-t border-dotted border-gray-600"></div>
                 </div>
               </Link>
             </article>
