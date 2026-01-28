@@ -1,267 +1,390 @@
 "use client";
 
 import { useState, type MouseEvent } from "react";
-import apiDevelopment from "@/app/public/payzonapi12.png";
-import asdshoppy from "@/app/public/shoppyVertical.png.png";
+import {
+  Facebook,
+  Twitter,
+  Instagram,
+  Linkedin,
+  Youtube,
+  Mail,
+  Phone,
+  MapPin,
+  Home,
+  Video,
+  BookOpen,
+  User,
+  ChevronRight,
+  ExternalLink,
+} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 import sadaivSatyaLogo from "@/app/public/Final Logo.png";
-
+import asdshoppy from "@/app/public/shoppyVertical.png.png";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
 
   const handleSubscribe = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    console.log("Subscribing email:", email);
-    // Add your subscription logic here
-    setEmail("");
+    if (email) {
+      console.log("Subscribing email:", email);
+      // Add your subscription logic here
+      setEmail("");
+      alert("सब्सक्रिप्शन के लिए धन्यवाद!");
+    }
   };
 
-  // Footer navigation sections
-  const footerSections = {
-    departments: [
-      { label: "होम", link: "/" },
-      { label: "भारत", link: "/bharat" },
-      { label: "विश्व", link: "/world" },
-      { label: "राजनीति", link: "/politics" },
-      { label: "मनोरंजन", link: "/entertainment" },
-      { label: "खेल", link: "/sports" },
-    ],
-    about: [
-      { label: "हमारे बारे में", link: "/about" },
-      { label: "संपर्क करें", link: "/contact" },
-      { label: "विज्ञापन", link: "/advertise" },
-      { label: "गोपनीयता नीति", link: "/privacy-policy" },
-      { label: "उपयोग की शर्तें", link: "/terms" },
-      { label: "DNPA आचार संहिता", link: "/dnpa-code" },
-    ],
-  };
+  // Main Categories - Matching Header
+  const mainCategories = [
+    { label: "होम", link: "/", icon: Home },
+    { label: "भारत", link: "/bharat" },
+    { label: "विश्व", link: "/world" },
+    { label: "राजनीति", link: "/politics" },
+    { label: "मनोरंजन", link: "/entertainment" },
+    { label: "खेल", link: "/sports" },
+    { label: "बिजनेस", link: "/business" },
+    { label: "टेक्नोलॉजी", link: "/technology" },
+  ];
+
+  const quickAccess = [
+    { label: "वेब स्टोरीज़", link: "/web-stories", icon: BookOpen },
+    { label: "वीडियो", link: "/videos", icon: Video },
+    { label: "प्रोफ़ाइल", link: "/profile", icon: User },
+  ];
+
+  const aboutLinks = [
+    { label: "हमारे बारे में", link: "/about" },
+    { label: "संपर्क करें", link: "/contact" },
+    { label: "विज्ञापन दें", link: "/advertise" },
+    { label: "करियर", link: "/careers" },
+    { label: "RSS फीड", link: "/rss" },
+  ];
+
+  const legalLinks = [
+    { label: "गोपनीयता नीति", link: "/privacy-policy" },
+    { label: "उपयोग की शर्तें", link: "/terms" },
+    { label: "DNPA आचार संहिता", link: "/dnpa-code" },
+    { label: "कुकी नीति", link: "/cookie-policy" },
+  ];
 
   const socialLinks = [
-    { icon: "facebook", label: "Facebook", link: "#", ariaLabel: "Facebook" },
     {
-      icon: "instagram",
+      icon: Facebook,
+      label: "Facebook",
+      link: "#",
+      bgColor: "bg-blue-600",
+      hoverColor: "hover:bg-blue-700",
+    },
+    {
+      icon: Twitter,
+      label: "Twitter",
+      link: "#",
+      bgColor: "bg-black",
+      hoverColor: "hover:bg-gray-800",
+    },
+    {
+      icon: Instagram,
       label: "Instagram",
       link: "#",
-      ariaLabel: "Instagram",
+      bgColor: "bg-pink-600",
+      hoverColor: "hover:bg-pink-700",
     },
-    { icon: "twitter", label: "Twitter", link: "#", ariaLabel: "Twitter" },
-    { icon: "youtube", label: "YouTube", link: "#", ariaLabel: "YouTube" },
+    {
+      icon: Linkedin,
+      label: "LinkedIn",
+      link: "#",
+      bgColor: "bg-blue-700",
+      hoverColor: "hover:bg-blue-800",
+    },
+    {
+      icon: Youtube,
+      label: "YouTube",
+      link: "#",
+      bgColor: "bg-red-600",
+      hoverColor: "hover:bg-red-700",
+    },
   ];
 
   return (
-    <footer className="bg-white text-black">
-      {/* Main Footer Content */}
-      <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-          {/* Logo and Description */}
-          <div className="lg:col-span-4">
-            {/* Logo */}
-            <div className="flex items-center gap-3 mb-6">
-              <img
-                src={sadaivSatyaLogo.src}
-                alt="सदैव सत्य News"
-                className="h-[125px] w-[125px]"
-              />
-              <h2
-                className="text-3xl font-semibold tracking-wide text-black"
-                style={{ fontFamily: "Rubik, sans-serif" }}
-              >
-                सदैव सत्य
-              </h2>
-            </div>
-
-            {/* Description */}
-            <p
-              className="text-gray-700 leading-relaxed mb-8 text-base max-w-md"
-              style={{ fontFamily: "Rubik, sans-serif" }}
-            >
-              सदैव सत्य एक पेशेवर समाचार मंच है, जो विश्वसनीय और रोचक समाचार
-              प्रदान करने के लिए समर्पित है। हमारा लक्ष्य आपको नवीनतम और
-              विश्वसनीय समाचारों से जोड़े रखना है।
-            </p>
-
-            {/* Social Links */}
-            <div>
-              <h3
-                className="text-lg font-medium mb-4 text-black"
-                style={{ fontFamily: "Rubik, sans-serif" }}
-              >
-                हमसे जुड़ें
+    <footer className="bg-white">
+      {/* Newsletter Section - Red Theme Matching Header */}
+      <div className="bg-gradient-to-r from-red-600 via-red-600 to-red-700">
+        <div className="max-w-7xl mx-auto px-4 py-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            {/* Left Content */}
+            <div className="text-white text-center lg:text-left">
+              <h3 className="text-2xl md:text-3xl font-bold mb-3">
+                न्यूज़लेटर की सदस्यता लें
               </h3>
-              <div className="flex gap-4">
-                {socialLinks.map((social, index) => (
-                  <a
-                    key={index}
-                    href={social.link}
-                    className="w-10 h-10 rounded-full bg-gray-200 hover:bg-blue-600 hover:text-white text-black flex items-center justify-center transition-all duration-300 hover:scale-110"
-                    aria-label={social.ariaLabel}
-                  >
-                    {social.icon === "facebook" && (
-                      <svg
-                        className="w-5 h-5"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                      </svg>
-                    )}
-                    {social.icon === "instagram" && (
-                      <svg
-                        className="w-5 h-5"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                      </svg>
-                    )}
-                    {social.icon === "twitter" && (
-                      <svg
-                        className="w-5 h-5"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                      </svg>
-                    )}
-                    {social.icon === "youtube" && (
-                      <svg
-                        className="w-5 h-5"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-                      </svg>
-                    )}
-                  </a>
-                ))}
-              </div>
+              <p className="text-red-50 text-sm md:text-base">
+                देश-विदेश की ताज़ा खबरें, राजनीति, खेल और मनोरंजन की अपडेट
+                <br className="hidden md:block" />
+                सीधे आपके इनबॉक्स में पाएं। अभी सब्सक्राइब करें!
+              </p>
             </div>
-          </div>
 
-          {/* Departments Column */}
-          <div className="lg:col-span-2">
-            <h3
-              className="text-lg font-semibold mb-6 text-black relative inline-block pb-2"
-              style={{ fontFamily: "Rubik, sans-serif" }}
-            >
-              विभाग
-              <span className="absolute bottom-0 left-0 w-12 h-0.5 bg-blue-500"></span>
-            </h3>
-            <ul className="space-y-3">
-              {footerSections.departments.map((item, index) => (
-                <li key={index}>
-                  <a
-                    href={item.link}
-                    className="text-gray-700 hover:text-black hover:translate-x-1 transition-all duration-200 text-base inline-block"
-                    style={{ fontFamily: "Rubik, sans-serif" }}
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* About Column */}
-          <div className="lg:col-span-3">
-            <h3
-              className="text-lg font-semibold mb-6 text-black relative inline-block pb-2"
-              style={{ fontFamily: "Rubik, sans-serif" }}
-            >
-              हमारे बारे में
-              <span className="absolute bottom-0 left-0 w-12 h-0.5 bg-blue-500"></span>
-            </h3>
-            <ul className="space-y-3">
-              {footerSections.about.map((item, index) => (
-                <li key={index}>
-                  <a
-                    href={item.link}
-                    className="text-gray-700 hover:text-black hover:translate-x-1 transition-all duration-200 text-base inline-block"
-                    style={{ fontFamily: "Rubik, sans-serif" }}
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Advertisement Section */}
-          <div className="lg:col-span-3">
-            <h3
-              className="text-lg font-semibold mb-6 text-black relative inline-block pb-2"
-              style={{ fontFamily: "Rubik, sans-serif" }}
-            >
-              विज्ञापन
-              <span className="absolute bottom-0 left-0 w-12 h-0.5 bg-blue-500"></span>
-            </h3>
-
-            {/* Advertisement Container */}
-            <div className="w-full max-w-[280px]">
-              <a href="#" className="block">
-                <img
-                  src={asdshoppy.src}
-                  alt="Advertisement"
-                  className="w-full h-auto rounded-lg border border-gray-300 hover:border-blue-500 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/20"
-                />
-              </a>
-            </div>
-          </div>
-        </div>
-
-        {/* Newsletter Section */}
-        {/* <div className="mt-16 pt-12 border-t border-gray-300">
-          <div className="max-w-2xl">
-            <h3
-              className="text-2xl font-semibold mb-3 text-black"
-              style={{ fontFamily: "Rubik, sans-serif" }}
-            >
-              न्यूज़लेटर की सदस्यता लें
-            </h3>
-            <p
-              className="text-gray-700 mb-6 text-base"
-              style={{ fontFamily: "Rubik, sans-serif" }}
-            >
-              नवीनतम समाचार और अपडेट सीधे अपने इनबॉक्स में प्राप्त करें
-            </p>
-
+            {/* Right Subscribe Form */}
             <div className="flex flex-col sm:flex-row gap-3">
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="आपका ईमेल पता"
-                className="flex-1 px-6 py-3.5 bg-gray-100 text-black border border-gray-300 focus:border-blue-500 focus:outline-none rounded-lg transition-colors text-base"
-                style={{ fontFamily: "Rubik, sans-serif" }}
+                placeholder="अपना ईमेल एड्रेस डालें"
+                className="flex-1 px-5 py-3 bg-white text-gray-900 border-2 border-transparent focus:border-red-800 focus:outline-none rounded-md transition-all text-sm placeholder:text-gray-400"
               />
               <button
                 onClick={handleSubscribe}
-                className="px-8 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/50 text-base whitespace-nowrap"
-                style={{ fontFamily: "Rubik, sans-serif" }}
+                className="px-8 py-3 bg-white text-red-600 font-bold rounded-md hover:bg-red-50 active:scale-95 transition-all duration-200 shadow-lg hover:shadow-xl text-sm whitespace-nowrap"
               >
-                सदस्यता लें
+                Subscribe
               </button>
             </div>
           </div>
-        </div> */}
+        </div>
+      </div>
+
+      {/* Main Footer Section */}
+      <div className="border-t border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 py-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10">
+            {/* Brand & Description - 4 columns */}
+            <div className="lg:col-span-4 space-y-6">
+              {/* Logo */}
+              <Link href="/" className="inline-block">
+                <Image
+                  src={sadaivSatyaLogo}
+                  alt="सदैव सत्य"
+                  width={140}
+                  height={140}
+                  className="h-[140px] w-auto object-contain"
+                  priority
+                />
+              </Link>
+
+              {/* Description */}
+              <p className="text-gray-600 text-sm leading-relaxed">
+                <span className="font-semibold text-gray-900">सदैव सत्य</span>{" "}
+                भारत का विश्वसनीय समाचार प्लेटफॉर्म है। हम आपको प्रामाणिक
+                और निष्पक्ष समाचार प्रदान करने के लिए प्रतिबद्ध हैं। देश,
+                दुनिया, राजनीति, खेल, मनोरंजन और व्यापार की हर खबर पर हमारी
+                नज़र है।
+              </p>
+
+              {/* Contact Information */}
+              <div className="space-y-3">
+                <div className="flex items-start gap-3 text-sm">
+                  <div className="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <MapPin className="w-4 h-4 text-red-600" />
+                  </div>
+                  <div className="text-gray-600">
+                    <p className="font-medium text-gray-900">हमारा पता</p>
+                    <p>भोपाल, मध्य प्रदेश, भारत</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3 text-sm">
+                  <div className="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0">
+                    <Phone className="w-4 h-4 text-red-600" />
+                  </div>
+                  <div className="text-gray-600">
+                    <p className="font-medium text-gray-900">फोन</p>
+                    <p>+91 XXX XXX XXXX</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3 text-sm">
+                  <div className="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center flex-shrink-0">
+                    <Mail className="w-4 h-4 text-red-600" />
+                  </div>
+                  <div className="text-gray-600">
+                    <p className="font-medium text-gray-900">ईमेल</p>
+                    <p>contact@sadaivsatya.com</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Categories - 2.5 columns */}
+            <div className="lg:col-span-3">
+              <h3 className="text-base font-bold text-gray-900 mb-5 flex items-center gap-2">
+                समाचार श्रेणियां
+                <span className="flex-1 h-px bg-gradient-to-r from-red-600 to-transparent"></span>
+              </h3>
+              <ul className="space-y-2.5">
+                {mainCategories.map((item, index) => (
+                  <li key={index}>
+                    <Link
+                      href={item.link}
+                      className="text-sm text-gray-600 hover:text-red-600 transition-colors duration-200 flex items-center gap-2 group"
+                    >
+                      {item.icon && (
+                        <item.icon className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                      )}
+                      {!item.icon && (
+                        <ChevronRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                      )}
+                      <span className="group-hover:translate-x-1 transition-transform">
+                        {item.label}
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Quick Access */}
+              <div className="mt-6 pt-6 border-t border-gray-200">
+                <h4 className="text-sm font-semibold text-gray-900 mb-3">
+                  त्वरित एक्सेस
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {quickAccess.map((item, index) => (
+                    <Link
+                      key={index}
+                      href={item.link}
+                      className="inline-flex items-center gap-2 px-3 py-1.5 bg-gray-50 hover:bg-red-50 text-gray-700 hover:text-red-600 rounded-md text-xs font-medium transition-all duration-200 border border-gray-200 hover:border-red-200"
+                    >
+                      <item.icon className="w-3.5 h-3.5" />
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Company & Legal - 2.5 columns */}
+            <div className="lg:col-span-3">
+              {/* Company Links */}
+              <div className="mb-8">
+                <h3 className="text-base font-bold text-gray-900 mb-5 flex items-center gap-2">
+                  कंपनी
+                  <span className="flex-1 h-px bg-gradient-to-r from-red-600 to-transparent"></span>
+                </h3>
+                <ul className="space-y-2.5">
+                  {aboutLinks.map((item, index) => (
+                    <li key={index}>
+                      <Link
+                        href={item.link}
+                        className="text-sm text-gray-600 hover:text-red-600 transition-colors duration-200 flex items-center gap-2 group"
+                      >
+                        <ChevronRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <span className="group-hover:translate-x-1 transition-transform">
+                          {item.label}
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Legal Links */}
+              <div>
+                <h3 className="text-base font-bold text-gray-900 mb-5 flex items-center gap-2">
+                  नीतियां
+                  <span className="flex-1 h-px bg-gradient-to-r from-red-600 to-transparent"></span>
+                </h3>
+                <ul className="space-y-2.5">
+                  {legalLinks.map((item, index) => (
+                    <li key={index}>
+                      <Link
+                        href={item.link}
+                        className="text-sm text-gray-600 hover:text-red-600 transition-colors duration-200 flex items-center gap-2 group"
+                      >
+                        <ChevronRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <span className="group-hover:translate-x-1 transition-transform">
+                          {item.label}
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* Social & Advertisement - 2 columns */}
+            <div className="lg:col-span-2">
+              {/* Social Media */}
+              <div className="mb-8">
+                <h3 className="text-base font-bold text-gray-900 mb-5 flex items-center gap-2">
+                  हमसे जुड़ें
+                  <span className="flex-1 h-px bg-gradient-to-r from-red-600 to-transparent"></span>
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {socialLinks.map((social, index) => (
+                    <a
+                      key={index}
+                      href={social.link}
+                      className={`w-10 h-10 rounded-full ${social.bgColor} ${social.hoverColor} flex items-center justify-center text-white transition-all duration-300 hover:scale-110 hover:shadow-lg`}
+                      aria-label={social.label}
+                      title={social.label}
+                    >
+                      <social.icon className="w-4 h-4" />
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {/* Advertisement */}
+              <div>
+                <h3 className="text-base font-bold text-gray-900 mb-5 flex items-center gap-2">
+                  विज्ञापन
+                  <span className="flex-1 h-px bg-gradient-to-r from-red-600 to-transparent"></span>
+                </h3>
+                <a
+                  href="#"
+                  className="block group overflow-hidden rounded-lg border-2 border-gray-200 hover:border-red-600 transition-all duration-300 hover:shadow-lg"
+                >
+                  <Image
+                    src={asdshoppy}
+                    alt="Advertisement"
+                    width={250}
+                    height={350}
+                    className="w-full h-auto group-hover:scale-105 transition-transform duration-300"
+                  />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-gray-300">
-        <div className="max-w-[1400px] mx-auto px-6 md:px-12 py-6">
+      <div className="border-t-2 border-gray-200 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 py-5">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p
-              className="text-gray-700 text-sm text-center md:text-left"
-              style={{ fontFamily: "Rubik, sans-serif" }}
-            >
-              © 2026 सदैव सत्य। सर्वाधिकार सुरक्षित।
-            </p>
-            <p
-              className="text-gray-700 text-sm text-center md:text-right"
-              style={{ fontFamily: "Rubik, sans-serif" }}
-            >
-              भारत का विश्वसनीय समाचार स्रोत
-            </p>
+            {/* Copyright */}
+            <div className="text-center md:text-left">
+              <p className="text-sm text-gray-600">
+                © 2026{" "}
+                <span className="font-bold text-red-600">सदैव सत्य</span>।
+                सर्वाधिकार सुरक्षित।
+              </p>
+              <p className="text-xs text-gray-500 mt-1">
+                भारत का विश्वसनीय समाचार स्रोत | Trusted News Platform of India
+              </p>
+            </div>
+
+            {/* Additional Info */}
+            <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-gray-500">
+              <span className="flex items-center gap-1">
+                Made with <span className="text-red-600 text-sm">❤</span> in
+                India
+              </span>
+              <span className="hidden md:inline text-gray-300">•</span>
+              <Link
+                href="/sitemap"
+                className="hover:text-red-600 transition-colors"
+              >
+                साइटमैप
+              </Link>
+              <span className="hidden md:inline text-gray-300">•</span>
+              <Link
+                href="/feedback"
+                className="hover:text-red-600 transition-colors"
+              >
+                फीडबैक
+              </Link>
+            </div>
           </div>
         </div>
       </div>
