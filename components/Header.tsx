@@ -111,9 +111,7 @@ const subcategories = [
   "मौसम",
 ];
 
-const apiUrl =
-  process.env.NEXT_PUBLIC_API_URL ||
-  "https://mapi.sadaivsatya.com/api/AdminApi/";
+const apiUrl = "https://mapi.sadaivsatya.com/api/AdminApi/";
 const apiBaseUrl =
   process.env.NEXT_PUBLIC_API_BASE_URL || "https://mapi.sadaivsatya.com";
 
@@ -155,9 +153,7 @@ export default function ExtraHeader() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch(
-          `${apiBaseUrl}/api/adminapi/getCategories`
-        );
+        const response = await fetch('/api/external/adminapi/getCategories')
         if (response.ok) {
           const data = await response.json();
           setCategoryItems(data);
@@ -176,7 +172,8 @@ export default function ExtraHeader() {
   useEffect(() => {
     const fetchBreakingNews = async () => {
       try {
-        const response = await fetch(`${apiUrl}BreakingNewsList?pageSize=5`);
+
+          const response = await fetch('/api/external/adminapi/BreakingNewsList?pageSize=5')
         if (response.ok) {
           const data = await response.json();
           setBreakingNews(data);
@@ -447,6 +444,7 @@ export default function ExtraHeader() {
                   {formattedDate}
                 </span>
               </div>
+              
             </div>
 
             {/* Right Section - Navigation, Subscribe, Social */}

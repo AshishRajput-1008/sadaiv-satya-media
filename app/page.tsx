@@ -82,7 +82,7 @@ const articles: Article[] = [
     newsHeading:
       "कहा– उत्तर प्रदेश के 'कल्याण' से जुड़ा उनका नाम सदैव प्रेरणा रहेगा",
     newsTag: "माता की चौकी के वीडियो हुए वायरल",
-    thumbnail: img1,
+    thumbnail: "https://www.sadaivsatya.com/_next/image?url=https%3A%2F%2Fmapi.sadaivsatya.com%2FMedia%2FNewsImage%2Fs21bzmuj5m3.webp&w=1920&q=72",
     newsCategory: "Meethee Mirchee",
     newsSubCategory: "Celebrity Gossip",
     updatedDate: "2026-01-09T15:50:30.507",

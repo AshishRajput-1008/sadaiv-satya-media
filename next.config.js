@@ -5,22 +5,33 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'images.unsplash.com',
-        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.pexels.com',
         pathname: '/**',
       },
       {
         protocol: 'https',
         hostname: 'mapi.sadaivsatya.com',
-        port: '',
         pathname: '/Media/**',
       },
       {
         protocol: 'https',
-        hostname: 'images.pexels.com',
-        port: '',
+        hostname: 'www.sadaivsatya.com', // 👈 added
         pathname: '/**',
       },
     ],
+  },
+
+  async rewrites() {
+    return [
+      {
+        source: '/api/external/:path*',
+        destination: 'https://mapi.sadaivsatya.com/api/:path*',
+      },
+    ];
   },
 };
 

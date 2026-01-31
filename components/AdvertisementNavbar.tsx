@@ -12,11 +12,11 @@ export default function ADvertismentWithNews() {
     <div className="flex flex-col lg:flex-row items-center gap-4 md:gap-6 px-4 md:px-8">
       {/* Left Half: News Section */}
       <div className="w-full lg:w-1/2 flex items-center gap-4 md:gap-6">
-        {/* News Image */}
+      {/* News Image */}
         <div className="w-[100px] sm:w-[140px] md:w-[200px] h-[100px] sm:h-[140px] md:h-[180px] flex-shrink-0">
           <div className="relative h-full rounded-lg overflow-hidden shadow-md group cursor-pointer">
             <img
-              src="http://localhost:3000/_next/image?url=https%3A%2F%2Fmapi.sadaivsatya.com%2FMedia%2FNewsImage%2Fpodg44xbezt.webp&w=1920&q=75"
+              src="https://www.sadaivsatya.com/_next/image?url=https%3A%2F%2Fmapi.sadaivsatya.com%2FMedia%2FNewsImage%2Fpodg44xbezt.webp&w=1920&q=72"
               alt="Trending News"
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             />
